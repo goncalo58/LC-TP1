@@ -2,7 +2,7 @@
   "version": "1",
   "metadata": {
     "marimo_version": "0.25.1",
-    "script_metadata_hash": null
+    "script_metadata_hash": "d1ced57134ef09f6bf75c37fa8dc89f6"
   },
   "cells": [
     {
@@ -65,7 +65,7 @@
     },
     {
       "id": "PKri",
-      "code_hash": "4bce178336840ca28f4ac7d800cd935e",
+      "code_hash": "405eb464f301fe01357b11e156c40197",
       "outputs": [],
       "console": []
     },
@@ -77,26 +77,54 @@
     },
     {
       "id": "SFPL",
-      "code_hash": "442c4fa75e76b61c732c7bb93bd3c721",
-      "outputs": [],
+      "code_hash": "2f7b87a808b8b62d974f56f23d1fe8d6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "BYtC",
       "code_hash": "2abba53c5bf7a78a43360bb67ed2b313",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"comparacao-de-desempenho\">Compara\u00e7\u00e3o de Desempenho</h3></span><marimo-ui-element object-id='SFPL-0' random-id='f5bea66e-a8be-07e5-3b2c-7f66e205dc98'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Estrat&#92;&#92;u00e9gia&#92;&quot;:&#92;&quot;Resolu&#92;&#92;u00e7&#92;&#92;u00e3o do Zero&#92;&quot;,&#92;&quot;Tempo (s)&#92;&quot;:0.482,&#92;&quot;Aulas Alteradas&#92;&quot;:&#92;&quot;M&#92;&#92;u00e1ximas (Sem Controlo)&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Estrat&#92;&#92;u00e9gia&#92;&quot;:&#92;&quot;Incremental (Warm-Start)&#92;&quot;,&#92;&quot;Tempo (s)&#92;&quot;:0.3079,&#92;&quot;Aulas Alteradas&#92;&quot;:0}]&quot;' data-total-rows='2' data-total-columns='3' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Estrat\u00e9gia&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Tempo (s)&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Aulas Alteradas&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"o-novo-horario-h1-foi-gerado-com-sucesso-total-de-aulas-agendadas-34\">O Novo Hor\u00e1rio (H1) foi gerado com sucesso! Total de aulas agendadas: 34</h3></span></div>"
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "RGSE",
-      "code_hash": "555fabe82bbf3751ee5fd7be51c16258",
-      "outputs": [],
+      "code_hash": "377875464785b9d3d536412b297e15cc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "Kclp",
       "code_hash": "e706c98813b68c5e6fc929b60f171e0b",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Auditoria do Hor\u00e1rio:</strong> Todas as restri\u00e7\u00f5es cumpridas com sucesso!</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Teste de Escalabilidade (Adicionar Turma):</strong> O modelo \u00e9 Vi\u00e1vel.</span></span></div>"
+          }
+        }
+      ],
       "console": []
     },
     {
@@ -113,7 +141,7 @@
       "console": []
     },
     {
-      "id": "nWHF",
+      "id": "Hstk",
       "code_hash": "46c3b8a8628ac0c6edb34ba05ad93d32",
       "outputs": [
         {
@@ -126,13 +154,13 @@
       "console": []
     },
     {
-      "id": "iLit",
+      "id": "nWHF",
       "code_hash": "aec00275661a7bff9b8f39212e00c0bd",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"horario-7oa\">Hor\u00e1rio: 7\u00baA</h3></span><marimo-ui-element object-id='nWHF-0' random-id='e5f1d1e8-9783-a974-a64c-a1ceb2a3acaf'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_4)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_6)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;-&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><hr /></span><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"horario-7ob\">Hor\u00e1rio: 7\u00baB</h3></span><marimo-ui-element object-id='nWHF-1' random-id='0c9247a0-f06a-f858-63bf-ddb258c0db1d'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_5)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_5)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_6)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><hr /></span></div>"
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"horario-7oa\">Hor\u00e1rio: 7\u00baA</h3></span><marimo-ui-element object-id='Hstk-0' random-id='b4f7719c-c6bb-7498-d69c-23b71a8f8c80'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_4)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_6)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;-&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><hr /></span><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"horario-7ob\">Hor\u00e1rio: 7\u00baB</h3></span><marimo-ui-element object-id='Hstk-1' random-id='f5aee7fe-2d70-ad6b-4469-e00542f66eb8'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_5)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_5)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_6)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><hr /></span></div>"
           }
         }
       ],

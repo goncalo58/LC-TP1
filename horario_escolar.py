@@ -204,16 +204,16 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
                 tem_antes = model_opt.NewBoolVar(f"antes_{prof}_{dia}_{p_opt}")
                 tem_depois = model_opt.NewBoolVar(f"depois_{prof}_{dia}_{p_opt}")
                 tem_agora = model_opt.NewBoolVar(f"agora_{prof}_{dia}_{p_opt}")
-        
+    
                 vars_antes = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] < p_opt]
                 vars_depois = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] > p_opt]
                 vars_agora = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] == p_opt]
-        
+    
                 if vars_antes and vars_depois and vars_agora:
                     model_opt.AddMaxEquality(tem_antes, vars_antes)
                     model_opt.AddMaxEquality(tem_depois, vars_depois)
                     model_opt.AddMaxEquality(tem_agora, vars_agora)
-            
+        
                     buraco = model_opt.NewBoolVar(f"buraco_{prof}_{dia}_{p_opt}")
                     model_opt.AddBoolAnd([tem_antes, tem_depois, tem_agora.Not()]).OnlyEnforceIf(buraco)
                     model_opt.AddBoolOr([tem_antes.Not(), tem_depois.Not(), tem_agora]).OnlyEnforceIf(buraco.Not())
@@ -281,14 +281,41 @@ def _(
         solver_zero.Solve(model_zero)
         tempo_zero = time.time() - t0_zero
 
+        # 1. Lista vazia para guardar as aulas do novo horário
+        registos_h1 = []
+    
+        # 2. Se o solver encontrou uma solução válida para os novos dados...
+        if status_h1 in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            # 3. Percorremos as variáveis do modelo H1 com nomes exclusivos para não chocar com o H0
+            for (t_h1, d_h1, dia_h1, p_h1, s_h1), var_h1 in vars_h1.items():
+                # 4. Se o solver deu o valor 1, esta aula vai acontecer
+                if solver_h1.Value(var_h1) == 1:
+                    registos_h1.append({
+                        "turma": t_h1, 
+                        "disciplina": d_h1, 
+                        "dia": dia_h1, 
+                        "periodo": p_h1, 
+                        "sala": s_h1
+                    })
+    
+        # 5. Guardamos o novo horário num DataFrame do Pandas chamado df_h1
+        df_h1 = pd.DataFrame(registos_h1)
+
+        # 6. Criamos a tabela comparativa original
         df_comparacao = pd.DataFrame([
             {"Estratégia": "Resolução do Zero", "Tempo (s)": round(tempo_zero, 4), "Aulas Alteradas": "Máximas (Sem Controlo)"},
             {"Estratégia": "Incremental (Warm-Start)", "Tempo (s)": round(tempo_inc, 4), "Aulas Alteradas": int(aulas_mudadas) if aulas_mudadas != "N/A" else "N/A"}
         ])
 
-        view_inc = mo.ui.table(df_comparacao)
+        # 7. Juntamos tudo na interface visual do Marimo
+        view_inc = mo.vstack([
+            mo.md("### Comparação de Desempenho"),
+            mo.ui.table(df_comparacao),
+            mo.md(f"### O Novo Horário (H1) foi gerado com sucesso! Total de aulas agendadas: {len(df_h1)}")
+        ])
+
     except Exception as e:
-        view_inc = mo.md(f"*Nota: A pasta 'dados_v2' ainda não foi criada ou carregada corretamente. Erro: {e}*")
+        view_inc = mo.md(f"**Ocorreu um erro:** {e}")
     return (view_inc,)
 
 
@@ -318,18 +345,18 @@ def _(
         erros = []
         if df.duplicated(subset=["turma", "dia", "periodo"]).sum() > 0:
             erros.append("R1 Violada: Turma com aulas sobrepostas.")
-    
+
         prof_disc_val = dict(zip(df_disc["disciplina"], df_disc["professor"]))
         df_teste = df.copy()
         df_teste["professor"] = df_teste["disciplina"].map(prof_disc_val)
 
         if df_teste.duplicated(subset=["professor", "dia", "periodo"]).sum() > 0:
             erros.append("R5 Violada: Professor em duas salas ao mesmo tempo.")
-    
+
         df_exc_check = df_teste.merge(df_exc, on=["professor", "dia", "periodo"], how="inner")
         if not df_exc_check.empty:
             erros.append("R6 Violada: Aula alocada em período de indisponibilidade.")
-    
+
         return erros if erros else ["Todas as restrições cumpridas com sucesso!"]
 
     resultado_validacao = validador_automatico(df_h0, disciplinas, excecoes)
