@@ -5,8 +5,9 @@
 
 import marimo
 
-__generated_with = "0.24.2"
+__generated_with = "0.25.1"
 app = marimo.App(width="medium")
+
 
 @app.cell
 def _():
@@ -15,7 +16,7 @@ def _():
     from pathlib import Path
     from ortools.sat.python import cp_model
 
-    return Path, mo, pd, cp_model
+    return Path, cp_model, pd
 
 
 @app.cell
@@ -41,116 +42,201 @@ def _(Path, pd):
     print("Disciplinas carregadas:", len(disciplinas))
     print("Tipos de salas carregados:", len(salas))
     print("Exceções de disponibilidade carregadas:", len(excecoes))
+    return disciplinas, excecoes, salas, turmas
 
-    return carregar_dados, disciplinas, excecoes, salas, turmas
 
 @app.cell
-def _(cp_model, disciplinas, excecoes, pd, salas, turmas):
+def _(cp_model, pd):
     def criar_modelo(turmas_df, disciplinas_df, salas_df, excecoes_df):
         model = cp_model.CpModel()
 
-        # 1. Parâmetros de Tempo
         DIAS = ["Seg", "Ter", "Qua", "Qui", "Sex"]
-        PERIODOS = list(range(1, 6))  # 1, 2, 3, 4, 5
+        PERIODOS = list(range(1, 6))
 
-        # Lista de turmas, professores, salas
         lista_turmas = turmas_df["turma"].tolist()
-        
-        # Mapeamento de salas por tipo e quantidade
-        # Se normal quantidade=6, criamos salas virtuais: Normal_1, Normal_2, ...
+
         salas_disponiveis = []
         for _, row in salas_df.iterrows():
             nome_sala = row["sala"]
-            qtd = row["quantidade"]
-            for i in range(1, qtd + 1):
-                salas_disponiveis.append((nome_sala, f"{nome_sala}_{i}", row["tipo"]))
+            for i in range(1, int(row["quantidade"]) + 1):
+                salas_disponiveis.append((nome_sala, f"{nome_sala}_{i}"))
 
-        # 2. VARIÁVEIS DE DECISÃO: x[turma, disciplina, dia, periodo, sala_instancia]
+        salas_por_disc = {}
+        for _, disc in disciplinas_df.iterrows():
+            s_req = (
+                disc["sala_especial"]
+                if pd.notna(disc["sala_especial"])
+                else "Sala Normal"
+            )
+            salas_por_disc[disc["disciplina"]] = [
+                s_inst
+                for s_nome, s_inst in salas_disponiveis
+                if s_nome == s_req
+            ]
+
+        prof_da_disc = dict(
+            zip(disciplinas_df["disciplina"], disciplinas_df["professor"])
+        )
+        cargas = dict(
+            zip(disciplinas_df["disciplina"], disciplinas_df["carga_semanal"])
+        )
+        duplo = dict(
+            zip(disciplinas_df["disciplina"], disciplinas_df["duplo_periodo"])
+        )
+
         x = {}
         for t in lista_turmas:
-            for _, disc in disciplinas_df.iterrows():
-                d_nome = disc["disciplina"]
-                s_req = disc["sala_especial"] if pd.notna(disc["sala_especial"]) else "Sala Normal"
-                
-                # Filtrar apenas salas compatíveis (R7)
-                salas_comp = [s_inst for s_nome, s_inst, s_tipo in salas_disponiveis if s_nome == s_req]
-                
+            for d, salas_comp in salas_por_disc.items():
                 for dia in DIAS:
                     for p in PERIODOS:
                         for s_inst in salas_comp:
-                            x[t, d_nome, dia, p, s_inst] = model.NewBoolVar(
-                                f"x_{t}_{d_nome}_{dia}_{p}_{s_inst}"
+                            x[t, d, dia, p, s_inst] = model.NewBoolVar(
+                                f"x_{t}_{d}_{dia}_{p}_{s_inst}"
                             )
 
-        # -------------------------------------------------------------
-        # RESTRIÇÕES OBRIGATÓRIAS (R1 - R8)
-        # -------------------------------------------------------------
+        def X(t, d, dia, p, s_inst):
+            return x.get((t, d, dia, p, s_inst), None)
 
-        # R2: Carga Horária Semanal exata por turma e disciplina
-        for t in lista_turmas:
-            for _, disc in disciplinas_df.iterrows():
-                d_nome = disc["disciplina"]
-                carga = disc["carga_semanal"]
-                vars_disc = [v for k, v in x.items() if k[0] == t and k[1] == d_nome]
-                model.Add(sum(vars_disc) == carga)
-
-        # R1: Uma turma só pode ter no máximo 1 aula por período
+        # R1: No máximo 1 aula por período por turma
         for t in lista_turmas:
             for dia in DIAS:
                 for p in PERIODOS:
-                    vars_tempo = [v for k, v in x.items() if k[0] == t and k[2] == dia and k[3] == p]
-                    model.Add(sum(vars_tempo) <= 1)
+                    vars_tempo = [
+                        X(t, d, dia, p, s)
+                        for d in salas_por_disc
+                        for s in salas_por_disc[d]
+                        if X(t, d, dia, p, s) is not None
+                    ]
+                    if vars_tempo:
+                        model.Add(sum(vars_tempo) <= 1)
 
-        # R5: Um professor não pode dar duas aulas no mesmo período
+        # R2: Carga Horária Semanal exata
+        for t in lista_turmas:
+            for d, carga in cargas.items():
+                vars_disc = [
+                    X(t, d, dia, p, s)
+                    for dia in DIAS
+                    for p in PERIODOS
+                    for s in salas_por_disc[d]
+                    if X(t, d, dia, p, s) is not None
+                ]
+                model.Add(sum(vars_disc) == int(carga))
+
+        # R3: Limite diário por disciplina (2 se bloco duplo, senão 1)
+        for t in lista_turmas:
+            for d, is_duplo in duplo.items():
+                limite_diario = 2 if is_duplo == "sim" else 1
+                for dia in DIAS:
+                    vars_dia = [
+                        X(t, d, dia, p, s)
+                        for p in PERIODOS
+                        for s in salas_por_disc[d]
+                        if X(t, d, dia, p, s) is not None
+                    ]
+                    if vars_dia:
+                        model.Add(sum(vars_dia) <= limite_diario)
+
+        # R4: Blocos Duplos Contíguos
+        for t in lista_turmas:
+            for d, is_duplo in duplo.items():
+                if is_duplo == "sim":
+                    for dia in DIAS:
+                        for p in PERIODOS:
+                            vars_p = [
+                                X(t, d, dia, p, s)
+                                for s in salas_por_disc[d]
+                                if X(t, d, dia, p, s) is not None
+                            ]
+                            if not vars_p:
+                                continue
+
+                            vars_vizinhos = []
+                            if p > 1:
+                                vars_vizinhos.extend(
+                                    [
+                                        X(t, d, dia, p - 1, s)
+                                        for s in salas_por_disc[d]
+                                        if X(t, d, dia, p - 1, s) is not None
+                                    ]
+                                )
+                            if p < 5:
+                                vars_vizinhos.extend(
+                                    [
+                                        X(t, d, dia, p + 1, s)
+                                        for s in salas_por_disc[d]
+                                        if X(t, d, dia, p + 1, s) is not None
+                                    ]
+                                )
+
+                            model.Add(sum(vars_vizinhos) >= sum(vars_p))
+
+        # R5: No máximo 1 aula por período por professor
         professores = disciplinas_df["professor"].unique()
         for prof in professores:
-            discs_prof = disciplinas_df[disciplinas_df["professor"] == prof]["disciplina"].tolist()
+            discs_prof = [d for d, pr in prof_da_disc.items() if pr == prof]
             for dia in DIAS:
                 for p in PERIODOS:
                     vars_prof = [
-                        v for k, v in x.items() 
-                        if k[1] in discs_prof and k[2] == dia and k[3] == p
+                        X(t, d, dia, p, s)
+                        for t in lista_turmas
+                        for d in discs_prof
+                        for s in salas_por_disc[d]
+                        if X(t, d, dia, p, s) is not None
                     ]
-                    model.Add(sum(vars_prof) <= 1)
+                    if vars_prof:
+                        model.Add(sum(vars_prof) <= 1)
 
-        # R6: Respeitar Indisponibilidades dos Professores
+        # R6: Respeito pelas Exceções de Indisponibilidade
         for _, exc in excecoes_df.iterrows():
             prof = exc["professor"]
             dia = exc["dia"]
-            p = exc["periodo"]
-            discs_prof = disciplinas_df[disciplinas_df["professor"] == prof]["disciplina"].tolist()
-            for k, v in x.items():
-                if k[1] in discs_prof and k[2] == dia and k[3] == p:
-                    model.Add(v == 0)
+            p = int(exc["periodo"])
+            discs_prof = [d for d, pr in prof_da_disc.items() if pr == prof]
+            for d in discs_prof:
+                for t in lista_turmas:
+                    for s in salas_por_disc[d]:
+                        var = X(t, d, dia, p, s)
+                        if var is not None:
+                            model.Add(var == 0)
 
-        # R4: Blocos Duplos (disciplinas com duplo_periodo == 'sim')
-        for t in lista_turmas:
-            for _, disc in disciplinas_df.iterrows():
-                if disc["duplo_periodo"] == "sim":
-                    d_nome = disc["disciplina"]
-                    for dia in DIAS:
-                        # Em cada dia, se houver aula no período p, tem de haver no p-1 ou p+1
-                        for p in PERIODOS:
-                            vars_p = [v for k, v in x.items() if k[0] == t and k[1] == d_nome and k[2] == dia and k[3] == p]
-                            vars_p_menos = [v for k, v in x.items() if k[0] == t and k[1] == d_nome and k[2] == dia and k[3] == p - 1]
-                            vars_p_mais = [v for k, v in x.items() if k[0] == t and k[1] == d_nome and k[2] == dia and k[3] == p + 1]
-                            
-                            # Se dá no periodo p, obriga a dar no anterior ou posterior
-                            model.Add(sum(vars_p_menos) + sum(vars_p_mais) >= sum(vars_p))
-
-        # R7: Capacidade e Uso de Salas (No máximo 1 aula por instância de sala no mesmo período)
-        todas_instancias_salas = [s_inst for _, s_inst, _ in salas_disponiveis]
-        for s_inst in todas_instancias_salas:
+        # R7: No máximo 1 aula por sala física por período
+        todas_instancias = [s_inst for _, s_inst in salas_disponiveis]
+        for s_inst in todas_instancias:
             for dia in DIAS:
                 for p in PERIODOS:
-                    vars_sala = [v for k, v in x.items() if k[4] == s_inst and k[2] == dia and k[3] == p]
-                    model.Add(sum(vars_sala) <= 1)
+                    vars_sala = [
+                        X(t, d, dia, p, s_inst)
+                        for t in lista_turmas
+                        for d in salas_por_disc
+                        if s_inst in salas_por_disc[d]
+                        and X(t, d, dia, p, s_inst) is not None
+                    ]
+                    if vars_sala:
+                        model.Add(sum(vars_sala) <= 1)
 
         return model, x
 
+    
+
+    return (criar_modelo,)
+
+
+@app.cell
+def _(cp_model, criar_modelo, disciplinas, excecoes, salas, turmas):
     model_h0, vars_h0 = criar_modelo(turmas, disciplinas, salas, excecoes)
-    print("Modelo construído com sucesso!")
-    return criar_modelo, model_h0, vars_h0
+    print(f"Modelo construído com {len(vars_h0)} variáveis!")
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = 30.0
+    status = solver.Solve(model_h0)
+
+    resultado_str = (
+        "Ótimo / Viável"
+        if status in (cp_model.OPTIMAL, cp_model.FEASIBLE)
+        else "Inviável"
+    )
+    print(f"Status da resolução: {resultado_str}")
+    return
 
 
 if __name__ == "__main__":
