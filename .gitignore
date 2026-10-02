@@ -1,0 +1,7 @@
+# Cache e estado do Marimo
+.marimo/
+
+# Cache do Python
+__pycache__/
+*.pyc
+.venv/
