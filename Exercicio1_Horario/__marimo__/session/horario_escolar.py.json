@@ -20,7 +20,7 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "b91753eaac055581ca42b8c9c66c0257",
+      "code_hash": "77f50035aaaf68ede529109877000bb6",
       "outputs": [
         {
           "type": "data",
@@ -34,7 +34,14 @@
     {
       "id": "vblA",
       "code_hash": "a2c32bb1b6a9afcd3a0f233e2ef5f98d",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"1-importacao-de-dados-regra-r8\">1. Importa\u00e7\u00e3o de Dados (Regra R8)</h2>\n<span class=\"paragraph\"><strong>O que fizemos:</strong> O professor pediu para n\u00e3o escrevermos o nome das turmas ou professores diretamente no c\u00f3digo (nada de dados \"hardcoded\"). O c\u00f3digo tem de funcionar para qualquer escola.\nPor isso, cri\u00e1mos uma fun\u00e7\u00e3o gen\u00e9rica usando a biblioteca <code>pandas</code>. Ela vai \u00e0 pasta, l\u00ea os ficheiros CSV e guarda tudo em tabelas virtuais chamadas DataFrames. Se o ficheiro CSV mudar, o modelo adapta-se logo.</span></span>"
+          }
+        }
+      ],
       "console": []
     },
     {
@@ -52,7 +59,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "0207c53eccceafffc28dfcb4cb9f4692",
+      "code_hash": "cb7a652590f9e5990bcf2b114f3ef136",
       "outputs": [
         {
           "type": "data",
@@ -66,18 +73,32 @@
     {
       "id": "PKri",
       "code_hash": "bc3798dfcdc3858766a16dfabe27cf38",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "Xref",
       "code_hash": "c91c1335cc13f7c17c6f2dcc5ece2e36",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Status da resolu\u00e7\u00e3o inicial:</strong> \u00d3timo/Vi\u00e1vel</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Demonstra\u00e7\u00e3o - Hor\u00e1rio da 7\u00baA:</strong></span></span><marimo-ui-element object-id='PKri-0' random-id='75df06e3-c1a9-ab51-24ea-1cf669bc333f'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_4)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_6)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;-&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element></div>"
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "SFPL",
-      "code_hash": "bbdc10776518e3243ba5e852ab38587f",
+      "code_hash": "4c660119bbbfd905c119facb6b098e66",
       "outputs": [
         {
           "type": "data",
@@ -95,7 +116,7 @@
         {
           "type": "data",
           "data": {
-            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-otimizacao-o1-minimizar-buracos-dos-professores\">3. Otimiza\u00e7\u00e3o (O1) - Minimizar Buracos dos Professores</h2>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Para evitar que os professores fiquem a apanhar secas (tempos livres no meio do hor\u00e1rio), cri\u00e1mos vari\u00e1veis falsas para detetar isso. Se o professor tiver aula antes e depois do per\u00edodo X, mas no per\u00edodo X n\u00e3o tiver nada, isso conta como \"1 buraco\". Depois mandamos o solver tentar que essa conta d\u00ea o valor mais perto de zero poss\u00edvel.</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Resultado:</strong> Buracos (Gaps) penalizados no hor\u00e1rio: 0.0</span></span></div>"
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-otimizacao-o1-minimizar-buracos-dos-professores\">3. Otimiza\u00e7\u00e3o (O1) - Minimizar Buracos dos Professores</h2>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Para evitar que os professores fiquem a apanhar secas (tempos livres no meio do hor\u00e1rio), cri\u00e1mos vari\u00e1veis falsas para detetar isso. Se o professor tiver aula antes e depois do per\u00edodo X, mas no per\u00edodo X n\u00e3o tiver nada, isso conta como \"1 buraco\". Depois mandamos o solver tentar que essa conta d\u00ea o valor mais perto de zero poss\u00edvel.\nNesta parte foi utilizado o auxilio de um LLM</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Resultado:</strong> Buracos (Gaps) penalizados no hor\u00e1rio: 0.0</span></span></div>"
           }
         }
       ],
@@ -103,48 +124,90 @@
     },
     {
       "id": "RGSE",
-      "code_hash": "065e517269e0e4b323e7245bdf05604a",
-      "outputs": [],
+      "code_hash": "37312801f813a441302343a8b9e9bc37",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "Kclp",
       "code_hash": "2abba53c5bf7a78a43360bb67ed2b313",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"4-construcao-incremental-regra-r9\">4. Constru\u00e7\u00e3o Incremental (Regra R9)</h2>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Se um professor ficar doente a meio do ano, n\u00e3o podemos deitar o hor\u00e1rio todo da escola para o lixo e refazer do zero (isso seria um caos para os alunos). O que fizemos foi ler os dados novos (<code>dados_v2</code>) e usar o hor\u00e1rio antigo como uma pista/palpite (<em>Warm-Start</em>). Dissemos ao solver: \"tenta arranjar a confus\u00e3o alterando o m\u00ednimo de aulas poss\u00edvel\".\nNesta parte foi utilizado o auxilio de um LLM</span></span><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"comparacao-de-desempenho\">Compara\u00e7\u00e3o de Desempenho</h3></span><marimo-ui-element object-id='RGSE-0' random-id='0d08fcac-6370-2674-5702-c2af04fcfbb7'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Estrat&#92;&#92;u00e9gia&#92;&quot;:&#92;&quot;Resolver do Zero (Mau)&#92;&quot;,&#92;&quot;Tempo (s)&#92;&quot;:0.496,&#92;&quot;Aulas Alteradas&#92;&quot;:&#92;&quot;M&#92;&#92;u00e1ximas (Sem Controlo)&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Estrat&#92;&#92;u00e9gia&#92;&quot;:&#92;&quot;Usar a Solu&#92;&#92;u00e7&#92;&#92;u00e3o Antiga (Bom)&#92;&quot;,&#92;&quot;Tempo (s)&#92;&quot;:0.3496,&#92;&quot;Aulas Alteradas&#92;&quot;:0}]&quot;' data-total-rows='2' data-total-columns='3' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Estrat\u00e9gia&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Tempo (s)&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Aulas Alteradas&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element></div>"
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "emfo",
       "code_hash": "64f15f966dea1a778465600808cf127b",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "Hstk",
       "code_hash": "e706c98813b68c5e6fc929b60f171e0b",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"5-validacao-automatica-e-testes\">5. Valida\u00e7\u00e3o Autom\u00e1tica e Testes</h2>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Para testar se o hor\u00e1rio bate certo, cri\u00e1mos uma auditoria em Python que pega na tabela final e verifica se houve duplica\u00e7\u00f5es. Tamb\u00e9m adicion\u00e1mos programaticamente uma \"Turma Teste\" aos dados iniciais, s\u00f3 para provar ao professor que o modelo se adapta automaticamente ao aumento de escala sem rebentar.</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Resultado da Auditoria:</strong> A auditoria n\u00e3o encontrou nenhum erro! O hor\u00e1rio est\u00e1 perfeito.</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Teste com Turma Extra:</strong> O modelo \u00e9 flex\u00edvel e a resolu\u00e7\u00e3o deu Vi\u00e1vel (Funcionou).</span></span></div>"
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "nWHF",
       "code_hash": "d80d0736942e9e5cfb8b44e06ef7330d",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "iLit",
       "code_hash": "aec00275661a7bff9b8f39212e00c0bd",
-      "outputs": [],
-      "console": []
-    },
-    {
-      "id": "ZHCJ",
-      "code_hash": "fb4e13f9bd504c23c5e18495e125300e",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-documentacao-e-entrega\">7. Documenta\u00e7\u00e3o e Entrega</h2>\n<h3 id=\"porque-escolhemos-o-or-tools-cp-sat\">Porque escolhemos o OR-Tools (CP-SAT)?</h3>\n<span class=\"paragraph\">Decidimos usar a biblioteca <strong>CP-SAT Solver da Google OR-Tools</strong> para resolver este trabalho pr\u00e1tico de <em>Timetabling</em>. A Programa\u00e7\u00e3o por Restri\u00e7\u00f5es (CP) foi a melhor op\u00e7\u00e3o porque nos deixou escrever regras de neg\u00f3cio diretas e l\u00f3gicas (como obrigar aos blocos duplos cont\u00edguos na R4 e impedir furos temporais na R6) sem termos de usar matem\u00e1tica muito complicada. Al\u00e9m disso, ligou-se de forma muito f\u00e1cil \u00e0s tabelas de dados do Pandas que us\u00e1mos.</span>\n<h3 id=\"porque-e-que-a-estrategia-incremental-e-importante-r9\">Porque \u00e9 que a Estrat\u00e9gia Incremental \u00e9 importante (R9)?</h3>\n<span class=\"paragraph\">No mundo real das escolas, h\u00e1 imprevistos. Se o programa refizesse o hor\u00e1rio todo a partir do zero sempre que um professor ficasse de baixa de tarde, isso seria um pesadelo: os alunos viam as suas rotinas completamente baralhadas.\nAo dizermos ao solver para olhar para o hor\u00e1rio antigo como uma pista (\"Warm-Start\") e ao pedirmos para ele alterar o m\u00ednimo de aulas poss\u00edvel, conseguimos consertar o conflito como uma opera\u00e7\u00e3o cir\u00fargica, afetando apenas as pessoas estritamente necess\u00e1rias.</span></span>"
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"horario-da-7oa\">Hor\u00e1rio da 7\u00baA</h3></span><marimo-ui-element object-id='nWHF-0' random-id='9b583c96-92a6-6895-e2c5-d494593769bc'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_4)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_6)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;-&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_2)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><hr /></span><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"horario-da-7ob\">Hor\u00e1rio da 7\u00baB</h3></span><marimo-ui-element object-id='nWHF-1' random-id='692ca306-e539-20e1-71ea-5964d316ba32'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Index0&#92;&quot;:1,&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_3)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:2,&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Ingl&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:3,&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;Seg&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Ci&#92;&#92;u00eancias (Laborat&#92;&#92;u00f3rio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;-&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:4,&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_4)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Hist&#92;&#92;u00f3ria (Sala Normal_5)&#92;&quot;},{&#92;&quot;Index0&#92;&quot;:5,&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;Seg&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_6)&#92;&quot;,&#92;&quot;Ter&#92;&quot;:&#92;&quot;Educa&#92;&#92;u00e7&#92;&#92;u00e3o F&#92;&#92;u00edsica (Gin&#92;&#92;u00e1sio_1)&#92;&quot;,&#92;&quot;Qua&#92;&quot;:&#92;&quot;Portugu&#92;&#92;u00eas (Sala Normal_1)&#92;&quot;,&#92;&quot;Qui&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_5)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;Matem&#92;&#92;u00e1tica (Sala Normal_6)&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Seg&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ter&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qua&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Qui&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;object&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[[&quot;Index0&quot;,[&quot;integer&quot;,&quot;int64&quot;]]]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><hr /></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "82c15c2754afd7c7dd8c028d64b290e8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-documentacao-e-entrega\">7. Documenta\u00e7\u00e3o e Entrega</h2>\n<h3 id=\"porque-escolhemos-o-or-tools-cp-sat\">Porque escolhemos o OR-Tools (CP-SAT)?</h3>\n<span class=\"paragraph\">Decidimos usar a biblioteca <strong>CP-SAT Solver da Google OR-Tools</strong> para resolver este trabalho pr\u00e1tico de <em>Timetabling</em>. A Programa\u00e7\u00e3o por Restri\u00e7\u00f5es (CP) foi a melhor op\u00e7\u00e3o porque nos deixou escrever regras de neg\u00f3cio diretas e l\u00f3gicas (como obrigar aos blocos duplos cont\u00edguos na R4 e impedir furos temporais na R6) sem termos de usar matem\u00e1tica muito complicada. Al\u00e9m disso, ligou-se de forma muito f\u00e1cil \u00e0s tabelas de dados do Pandas que us\u00e1mos.</span>\n<h3 id=\"porque-e-que-a-estrategia-incremental-e-importante-r9\">Porque \u00e9 que a Estrat\u00e9gia Incremental \u00e9 importante (R9)?</h3>\n<span class=\"paragraph\">No mundo real das escolas, h\u00e1 imprevistos. Se o programa refizesse o hor\u00e1rio todo a partir do zero sempre que um professor ficasse de baixa de tarde, isso seria um pesadelo: os alunos viam as suas rotinas completamente baralhadas.\nAo dizermos ao solver para olhar para o hor\u00e1rio antigo como uma pista (\"Warm-Start\") e ao pedirmos para ele alterar o m\u00ednimo de aulas poss\u00edvel, conseguimos consertar o conflito como uma opera\u00e7\u00e3o cir\u00fargica, afetando apenas as pessoas estritamente necess\u00e1rias.</span>\n<h3 id=\"uso-de-ferramentas-llm-registo-de-dialogo\">Uso de Ferramentas LLM (Registo de Di\u00e1logo)</h3>\n<span class=\"paragraph\">O link para o di\u00e1logo integral com o LLM est\u00e1 dispon\u00edvel aqui: <strong><a href=\"https://share.gemini.google/bO0gYMhPdudN\" rel=\"noopener noreferrer\" target=\"_blank\">https://share.gemini.google/bO0gYMhPdudN</a></strong></span>\n<span class=\"paragraph\">Durante o desenvolvimento, o uso do LLM focou-se em dois pilares avaliados:</span>\n<ol>\n<li><strong>Adequa\u00e7\u00e3o e Flexibilidade:</strong> O LLM foi usado n\u00e3o para reescrever a l\u00f3gica de neg\u00f3cio do zero, mas para integrar a l\u00f3gica de CP-SAT (Warm-Start para <marimo-tex class=\"arithmatex\">||(H_1||)</marimo-tex>) dentro da arquitetura do Marimo. Ajudou-nos a adaptar a leitura din\u00e2mica de duas fontes de dados diferentes (<code>dados/</code> e <code>dados_v2/</code>), provando a flexibilidade do sistema a novos requisitos.</li>\n<li><strong>Resolu\u00e7\u00e3o de Problemas Espec\u00edficos do Framework:</strong> Devido \u00e0 natureza reativa do Marimo, depar\u00e1mo-nos com erros de redefini\u00e7\u00e3o de vari\u00e1veis entre c\u00e9lulas (<code>NameError</code>). O LLM foi crucial para identificar o problema de \u00e2mbito (<em>scope</em>) das vari\u00e1veis e reestruturar os ciclos de extra\u00e7\u00e3o de dados sem comprometer a integridade do modelo matem\u00e1tico.</li>\n<li>**O modelo de linguagem (LLM) foi utilizado como ferramenta de suporte \u00e0 depura\u00e7\u00e3o (debugging). A partir da explica\u00e7\u00e3o estrutural dos erros l\u00f3gicos identificados na vers\u00e3o inicial do c\u00f3digo, a solu\u00e7\u00e3o final foi formulada e implementada de forma aut\u00f3noma</li>\n</ol></span>"
           }
         }
       ],
