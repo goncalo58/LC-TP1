@@ -277,26 +277,36 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
         discs_prof_opt = [d for d, p in prof_da_disc_opt.items() if p == prof]
         for dia in dias_opt:
             for p_opt in range(2, 5): 
-                tem_antes = model_opt.NewBoolVar(f"antes_{prof}_{dia}_{p_opt}")
-                tem_depois = model_opt.NewBoolVar(f"depois_{prof}_{dia}_{p_opt}")
-                tem_agora = model_opt.NewBoolVar(f"agora_{prof}_{dia}_{p_opt}")
-
+                
                 vars_antes = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] < p_opt]
                 vars_depois = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] > p_opt]
                 vars_agora = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] == p_opt]
 
-                if vars_antes and vars_depois and vars_agora:
-                    model_opt.AddMaxEquality(tem_antes, vars_antes)
-                    model_opt.AddMaxEquality(tem_depois, vars_depois)
+                # 1. Se não pode ter aulas antes OU depois, é impossível ser buraco. Saltamos.
+                if not vars_antes or not vars_depois:
+                    continue
+                
+                tem_antes = model_opt.NewBoolVar(f"antes_{prof}_{dia}_{p_opt}")
+                tem_depois = model_opt.NewBoolVar(f"depois_{prof}_{dia}_{p_opt}")
+                tem_agora = model_opt.NewBoolVar(f"agora_{prof}_{dia}_{p_opt}")
+
+                model_opt.AddMaxEquality(tem_antes, vars_antes)
+                model_opt.AddMaxEquality(tem_depois, vars_depois)
+
+                # 2. Se a lista 'agora' estiver vazia, significa que ele não pode dar aula neste período.
+                # Logo, tem_agora é obrigatoriamente 0. Mas continuamos a testar o buraco!
+                if vars_agora:
                     model_opt.AddMaxEquality(tem_agora, vars_agora)
-    
-                    buraco = model_opt.NewBoolVar(f"buraco_{prof}_{dia}_{p_opt}")
-                    model_opt.AddBoolAnd([tem_antes, tem_depois, tem_agora.Not()]).OnlyEnforceIf(buraco)
-                    model_opt.AddBoolOr([tem_antes.Not(), tem_depois.Not(), tem_agora]).OnlyEnforceIf(buraco.Not())
-                    buracos.append(buraco)
+                else:
+                    model_opt.Add(tem_agora == 0)
+                
+                # 3. A tua lógica original mantida intacta
+                buraco = model_opt.NewBoolVar(f"buraco_{prof}_{dia}_{p_opt}")
+                model_opt.AddBoolAnd([tem_antes, tem_depois, tem_agora.Not()]).OnlyEnforceIf(buraco)
+                model_opt.AddBoolOr([tem_antes.Not(), tem_depois.Not(), tem_agora]).OnlyEnforceIf(buraco.Not())
+                buracos.append(buraco)
 
     model_opt.Minimize(sum(buracos))
-
     solver_opt = cp_model.CpSolver()
     solver_opt.parameters.max_time_in_seconds = 30.0
     status_opt = solver_opt.Solve(model_opt)
