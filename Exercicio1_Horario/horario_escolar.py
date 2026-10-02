@@ -166,7 +166,7 @@ def _(cp_model, pd):
                     if vars_dia:
                         model.Add(sum(vars_dia) <= limite_diario)
 
-        # Regra 4: Blocos Duplos (aulas práticas seguidas)
+        # Regra 4: Blocos Duplos (aulas práticas seguidas). Nesta parte foi utilizado o auxilio de um LLM
         for t in lista_turmas:
             for d, is_duplo in duplo.items():
                 if str(is_duplo).strip().lower() == "sim":
@@ -262,6 +262,7 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
         ## 3. Otimização (O1) - Minimizar Buracos dos Professores
 
         **A nossa ideia:** Para evitar que os professores fiquem a apanhar secas (tempos livres no meio do horário), criámos variáveis falsas para detetar isso. Se o professor tiver aula antes e depois do período X, mas no período X não tiver nada, isso conta como "1 buraco". Depois mandamos o solver tentar que essa conta dê o valor mais perto de zero possível.
+        Nesta parte foi utilizado o auxilio de um LLM
         """
     )
 
@@ -341,6 +342,7 @@ def _(
         ## 4. Construção Incremental (Regra R9)
 
         **A nossa ideia:** Se um professor ficar doente a meio do ano, não podemos deitar o horário todo da escola para o lixo e refazer do zero (isso seria um caos para os alunos). O que fizemos foi ler os dados novos (`dados_v2`) e usar o horário antigo como uma pista/palpite (*Warm-Start*). Dissemos ao solver: "tenta arranjar a confusão alterando o mínimo de aulas possível".
+        Nesta parte foi utilizado o auxilio de um LLM
         """
     )
 
@@ -519,6 +521,17 @@ def _(mo):
     ### Porque é que a Estratégia Incremental é importante (R9)?
     No mundo real das escolas, há imprevistos. Se o programa refizesse o horário todo a partir do zero sempre que um professor ficasse de baixa de tarde, isso seria um pesadelo: os alunos viam as suas rotinas completamente baralhadas.
     Ao dizermos ao solver para olhar para o horário antigo como uma pista ("Warm-Start") e ao pedirmos para ele alterar o mínimo de aulas possível, conseguimos consertar o conflito como uma operação cirúrgica, afetando apenas as pessoas estritamente necessárias.
+
+    ### Uso de Ferramentas LLM (Registo de Diálogo)
+    O link para o diálogo integral com o LLM está disponível aqui: **https://share.gemini.google/bO0gYMhPdudN**
+
+    Durante o desenvolvimento, o uso do LLM focou-se em dois pilares avaliados:
+    
+    1. **Adequação e Flexibilidade:** O LLM foi usado não para reescrever a lógica de negócio do zero, mas para integrar a lógica de CP-SAT (Warm-Start para $H_1$) dentro da arquitetura do Marimo. Ajudou-nos a adaptar a leitura dinâmica de duas fontes de dados diferentes (`dados/` e `dados_v2/`), provando a flexibilidade do sistema a novos requisitos.
+    
+    2. **Resolução de Problemas Específicos do Framework:** Devido à natureza reativa do Marimo, deparámo-nos com erros de redefinição de variáveis entre células (`NameError`). O LLM foi crucial para identificar o problema de âmbito (*scope*) das variáveis e reestruturar os ciclos de extração de dados sem comprometer a integridade do modelo matemático.
+
+    3. **O modelo de linguagem (LLM) foi utilizado como ferramenta de suporte à depuração (debugging). A partir da explicação estrutural dos erros lógicos identificados na versão inicial do código, a solução final foi formulada e implementada de forma autónoma
     """)
     return
 
