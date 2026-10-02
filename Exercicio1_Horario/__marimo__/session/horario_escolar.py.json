@@ -1,0 +1,154 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.25.1",
+    "script_metadata_hash": "d1ced57134ef09f6bf75c37fa8dc89f6"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "754129c389e1b1d3a93318f30ceddc5b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "b91753eaac055581ca42b8c9c66c0257",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "a2c32bb1b6a9afcd3a0f233e2ef5f98d",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "e4d52f4d3d21bc732b05d4dc9f962cbd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"2-modelacao-do-problema-regras-r1-a-r7\">2. Modela\u00e7\u00e3o do Problema (Regras R1 a R7)</h2>\n<h3 id=\"variaveis-e-excecoes-r6\">Vari\u00e1veis e Exce\u00e7\u00f5es (R6)</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> O solver precisa de vari\u00e1veis booleanas (0 ou 1) que cruzam: Turma + Disciplina + Dia + Per\u00edodo + Sala. Se for 1, a aula acontece ali. Se for 0, n\u00e3o acontece.\nPara a regra <strong>R6</strong> (professores indispon\u00edveis), em vez de criarmos milhares de vari\u00e1veis que d\u00e3o zero, otimiz\u00e1mos o processo: o c\u00f3digo v\u00ea a lista de exce\u00e7\u00f5es e <strong>nem sequer cria</strong> as vari\u00e1veis nessas horas. O solver fica muito mais r\u00e1pido assim.</span>\n<h3 id=\"regra-r1-limite-de-turmas\">Regra R1: Limite de turmas</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Uma turma n\u00e3o se pode dividir ao meio. Fixamos uma turma, um dia e uma hora. A soma de todas as aulas poss\u00edveis nesse momento n\u00e3o pode passar de 1 (no m\u00e1ximo t\u00eam uma aula).</span>\n<h3 id=\"regra-r2-carga-horaria-semanal\">Regra R2: Carga Hor\u00e1ria Semanal</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> A tabela diz que a turma tem X horas de Matem\u00e1tica por semana. Fomos buscar todas as vari\u00e1veis de Matem\u00e1tica dessa turma na semana toda e dissemos ao solver: a soma disto tudo tem de ser estritamente igual \u00e0quele n\u00famero X.</span>\n<h3 id=\"regra-r3-espalhar-as-aulas-limite-diario\">Regra R3: Espalhar as aulas (Limite di\u00e1rio)</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Ningu\u00e9m quer ter 4 horas de Portugu\u00eas no mesmo dia. Ent\u00e3o, se a disciplina for \"normal\", o limite di\u00e1rio \u00e9 1 aula. Se a tabela disser que tem <code>duplo_periodo</code>, o limite passa a 2 aulas por dia. Isto espalha as aulas pela semana.</span>\n<h3 id=\"regra-r4-blocos-duplos\">Regra R4: Blocos Duplos</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Algumas disciplinas pr\u00e1ticas precisam de 2 tempos seguidos (ex: F\u00edsico-Qu\u00edmica). Um tempo solto n\u00e3o serve. Dissemos ao modelo: \"Se meteres uma aula no per\u00edodo P, \u00e9s obrigado a meter outra colar a ela, ou no P-1 ou no P+1\".</span>\n<h3 id=\"regra-r5-professores\">Regra R5: Professores</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Um professor s\u00f3 pode estar numa sala. Num determinado dia e per\u00edodo, somamos todas as aulas que aquele professor pode dar a todas as turmas. A soma final n\u00e3o pode passar de 1.</span>\n<h3 id=\"regra-r7-as-salas\">Regra R7: As Salas</h3>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Para a tipologia (s\u00f3 Gin\u00e1sio para Educa\u00e7\u00e3o F\u00edsica), resolvemos isso filtrando logo no in\u00edcio. Para a lota\u00e7\u00e3o f\u00edsica, somamos todas as turmas que tentam entrar na mesma sala \u00e0 mesma hora, e limitamos a 1.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "0207c53eccceafffc28dfcb4cb9f4692",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "bc3798dfcdc3858766a16dfabe27cf38",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "c91c1335cc13f7c17c6f2dcc5ece2e36",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "bbdc10776518e3243ba5e852ab38587f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "36c624030be8f87bcc7b76397adcb5d8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-otimizacao-o1-minimizar-buracos-dos-professores\">3. Otimiza\u00e7\u00e3o (O1) - Minimizar Buracos dos Professores</h2>\n<span class=\"paragraph\"><strong>A nossa ideia:</strong> Para evitar que os professores fiquem a apanhar secas (tempos livres no meio do hor\u00e1rio), cri\u00e1mos vari\u00e1veis falsas para detetar isso. Se o professor tiver aula antes e depois do per\u00edodo X, mas no per\u00edodo X n\u00e3o tiver nada, isso conta como \"1 buraco\". Depois mandamos o solver tentar que essa conta d\u00ea o valor mais perto de zero poss\u00edvel.</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Resultado:</strong> Buracos (Gaps) penalizados no hor\u00e1rio: 0.0</span></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "065e517269e0e4b323e7245bdf05604a",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "2abba53c5bf7a78a43360bb67ed2b313",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "64f15f966dea1a778465600808cf127b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "e706c98813b68c5e6fc929b60f171e0b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "d80d0736942e9e5cfb8b44e06ef7330d",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "aec00275661a7bff9b8f39212e00c0bd",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "fb4e13f9bd504c23c5e18495e125300e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-documentacao-e-entrega\">7. Documenta\u00e7\u00e3o e Entrega</h2>\n<h3 id=\"porque-escolhemos-o-or-tools-cp-sat\">Porque escolhemos o OR-Tools (CP-SAT)?</h3>\n<span class=\"paragraph\">Decidimos usar a biblioteca <strong>CP-SAT Solver da Google OR-Tools</strong> para resolver este trabalho pr\u00e1tico de <em>Timetabling</em>. A Programa\u00e7\u00e3o por Restri\u00e7\u00f5es (CP) foi a melhor op\u00e7\u00e3o porque nos deixou escrever regras de neg\u00f3cio diretas e l\u00f3gicas (como obrigar aos blocos duplos cont\u00edguos na R4 e impedir furos temporais na R6) sem termos de usar matem\u00e1tica muito complicada. Al\u00e9m disso, ligou-se de forma muito f\u00e1cil \u00e0s tabelas de dados do Pandas que us\u00e1mos.</span>\n<h3 id=\"porque-e-que-a-estrategia-incremental-e-importante-r9\">Porque \u00e9 que a Estrat\u00e9gia Incremental \u00e9 importante (R9)?</h3>\n<span class=\"paragraph\">No mundo real das escolas, h\u00e1 imprevistos. Se o programa refizesse o hor\u00e1rio todo a partir do zero sempre que um professor ficasse de baixa de tarde, isso seria um pesadelo: os alunos viam as suas rotinas completamente baralhadas.\nAo dizermos ao solver para olhar para o hor\u00e1rio antigo como uma pista (\"Warm-Start\") e ao pedirmos para ele alterar o m\u00ednimo de aulas poss\u00edvel, conseguimos consertar o conflito como uma opera\u00e7\u00e3o cir\u00fargica, afetando apenas as pessoas estritamente necess\u00e1rias.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

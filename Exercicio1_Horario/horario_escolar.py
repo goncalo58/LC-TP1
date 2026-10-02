@@ -29,7 +29,7 @@ def _(Path, mo, pd):
     view_r8 = mo.md(
         r"""
         ## 1. Importação de Dados (Regra R8)
-    
+
         **O que fizemos:** O professor pediu para não escrevermos o nome das turmas ou professores diretamente no código (nada de dados "hardcoded"). O código tem de funcionar para qualquer escola.
         Por isso, criámos uma função genérica usando a biblioteca `pandas`. Ela vai à pasta, lê os ficheiros CSV e guarda tudo em tabelas virtuais chamadas DataFrames. Se o ficheiro CSV mudar, o modelo adapta-se logo.
         """
@@ -44,8 +44,7 @@ def _(Path, mo, pd):
         excecoes_df = pd.read_csv(caminho / "disponibilidade_excecoes.csv")
         return turmas_df, disciplinas_df, salas_df, excecoes_df
 
-    turmas, disciplinas, salas, excecoes = carregar_dados("dados")
-
+    turmas, disciplinas, salas, excecoes = carregar_dados("Exercicio1_Horario/dados")
     return carregar_dados, disciplinas, excecoes, salas, turmas, view_r8
 
 
@@ -261,7 +260,7 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
     view_opt_md = mo.md(
         r"""
         ## 3. Otimização (O1) - Minimizar Buracos dos Professores
-    
+
         **A nossa ideia:** Para evitar que os professores fiquem a apanhar secas (tempos livres no meio do horário), criámos variáveis falsas para detetar isso. Se o professor tiver aula antes e depois do período X, mas no período X não tiver nada, isso conta como "1 buraco". Depois mandamos o solver tentar que essa conta dê o valor mais perto de zero possível.
         """
     )
@@ -277,7 +276,7 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
         discs_prof_opt = [d for d, p in prof_da_disc_opt.items() if p == prof]
         for dia in dias_opt:
             for p_opt in range(2, 5): 
-                
+            
                 vars_antes = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] < p_opt]
                 vars_depois = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] > p_opt]
                 vars_agora = [v for k, v in vars_opt.items() if k[1] in discs_prof_opt and k[2] == dia and k[3] == p_opt]
@@ -285,7 +284,7 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
                 # 1. Se não pode ter aulas antes OU depois, é impossível ser buraco. Saltamos.
                 if not vars_antes or not vars_depois:
                     continue
-                
+            
                 tem_antes = model_opt.NewBoolVar(f"antes_{prof}_{dia}_{p_opt}")
                 tem_depois = model_opt.NewBoolVar(f"depois_{prof}_{dia}_{p_opt}")
                 tem_agora = model_opt.NewBoolVar(f"agora_{prof}_{dia}_{p_opt}")
@@ -299,7 +298,7 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
                     model_opt.AddMaxEquality(tem_agora, vars_agora)
                 else:
                     model_opt.Add(tem_agora == 0)
-                
+            
                 # 3. A tua lógica original mantida intacta
                 buraco = model_opt.NewBoolVar(f"buraco_{prof}_{dia}_{p_opt}")
                 model_opt.AddBoolAnd([tem_antes, tem_depois, tem_agora.Not()]).OnlyEnforceIf(buraco)
@@ -317,7 +316,6 @@ def _(cp_model, criar_modelo, disciplinas, excecoes, mo, salas, turmas):
         view_opt_md,
         mo.md(f"**Resultado:** Buracos (Gaps) penalizados no horário: {gaps_encontrados}")
     ])
-
     return (view_opt,)
 
 
@@ -341,7 +339,7 @@ def _(
     view_inc_md = mo.md(
         r"""
         ## 4. Construção Incremental (Regra R9)
-    
+
         **A nossa ideia:** Se um professor ficar doente a meio do ano, não podemos deitar o horário todo da escola para o lixo e refazer do zero (isso seria um caos para os alunos). O que fizemos foi ler os dados novos (`dados_v2`) e usar o horário antigo como uma pista/palpite (*Warm-Start*). Dissemos ao solver: "tenta arranjar a confusão alterando o mínimo de aulas possível".
         """
     )
@@ -356,10 +354,10 @@ def _(
             if k in vars_h0:
                 # Vamos ver como estava esta aula no horário antigo
                 val_antigo = solver_h0.Value(vars_h0[k])
-            
+        
                 # AddHint dá uma "pista" ao solver para tentar usar a solução antiga
                 model_h1.AddHint(v, val_antigo)
-            
+        
                 # Se a aula estava marcada (1), criamos uma variável "mudou" que dispara 
                 # e fica a 1 caso o solver seja forçado a movê-la para resolver o conflito
                 if val_antigo == 1:
@@ -398,7 +396,7 @@ def _(
 
     except Exception as e:
         view_inc = mo.vstack([view_inc_md, mo.md(f"**Aviso:** O teste falhou. Confirma se tens a pasta 'dados_v2' criada. Erro: {e}")])
-    
+
     return (view_inc,)
 
 
@@ -423,7 +421,7 @@ def _(
     view_val_md = mo.md(
         r"""
         ## 5. Validação Automática e Testes
-    
+
         **A nossa ideia:** Para testar se o horário bate certo, criámos uma auditoria em Python que pega na tabela final e verifica se houve duplicações. Também adicionámos programaticamente uma "Turma Teste" aos dados iniciais, só para provar ao professor que o modelo se adapta automaticamente ao aumento de escala sem rebentar.
         """
     )
@@ -432,7 +430,7 @@ def _(
         if df.empty:
             return ["Não há horário para validar."]
         erros = []
-    
+
         # O .duplicated() verifica se alguma turma tem duas linhas com o mesmo dia e período
         if df.duplicated(subset=["turma", "dia", "periodo"]).sum() > 0:
             erros.append("Falha na R1: Turma com aulas ao mesmo tempo.")
