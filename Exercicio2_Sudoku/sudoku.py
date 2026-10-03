@@ -30,6 +30,7 @@ def _(mo):
 
     A nossa única tarefa é explicar ao computador as regras do jogo. A regra de ouro do Sudoku é muito simples: **num grupo de células, os números não se podem repetir**. A ferramenta da Google percebe esta regra perfeitamente se a modelarmos como um problema de lógica.
 
+    Em algumas partes foi usado o auxilio de uma LLM, pode se verificar como forma de comentario as partes em questao. Aqui esta o link para a conversa com a LLM : https://share.gemini.google/3hXBsoW7E5to
     ---
 
     ## 1. O Saco Genérico (Regra R1)
@@ -110,6 +111,7 @@ def _():
 
 
     class Path(Box):
+        #Este codigo foi gerado com auxilio de um LLM
         def __init__(self, n, start, end):
             super().__init__(n)
 
@@ -311,6 +313,7 @@ def _(build_and_solve_sudoku, generate_random_clues, mo):
         return None, None
 
     def run_tests():
+        #Os testes tiveram auxilio de uma LLM
         log = ["**A provar que tudo funciona:**\n"]
 
         # TESTE 1: Obrigar o saco a rejeitar lixo

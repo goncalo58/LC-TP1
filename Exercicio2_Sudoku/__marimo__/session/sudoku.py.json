@@ -20,12 +20,12 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "abe82c86eaeeeafa9f98e901bdeed784",
+      "code_hash": "e261b0302f30667a724b6279f611a608",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"trabalho-pratico-sudoku-explicado-de-forma-simples\">Trabalho Pr\u00e1tico: Sudoku (Explicado de Forma Simples)</h1>\n<span class=\"paragraph\">Neste trabalho, vamos construir um Sudoku inteligente. Em vez de escrevermos c\u00f3digo super complexo para o computador adivinhar os n\u00fameros, vamos usar uma ferramenta da Google (o OR-Tools).</span>\n<span class=\"paragraph\">A nossa \u00fanica tarefa \u00e9 explicar ao computador as regras do jogo. A regra de ouro do Sudoku \u00e9 muito simples: <strong>num grupo de c\u00e9lulas, os n\u00fameros n\u00e3o se podem repetir</strong>. A ferramenta da Google percebe esta regra perfeitamente se a modelarmos como um problema de l\u00f3gica.</span>\n<hr />\n<h2 id=\"1-o-saco-generico-regra-r1\">1. O Saco Gen\u00e9rico (Regra R1)</h2>\n<span class=\"paragraph\">A classe <code>Box</code> \u00e9 como se fosse um saco vazio. N\u00f3s podemos atirar c\u00e9lulas l\u00e1 para dentro.</span>\n<span class=\"paragraph\">Este saco n\u00e3o quer saber se as c\u00e9lulas v\u00e3o formar uma linha, uma coluna ou um quadrado. Ele s\u00f3 serve para duas coisas:</span>\n<ol>\n<li>Guardar a posi\u00e7\u00e3o (linha e coluna) e o n\u00famero que l\u00e1 est\u00e1.</li>\n<li>Dar um estalo (erro) se tentarmos meter l\u00e1 dentro uma coordenada ou um n\u00famero que n\u00e3o existe no tabuleiro de Sudoku.</li>\n</ol></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"trabalho-pratico-sudoku-explicado-de-forma-simples\">Trabalho Pr\u00e1tico: Sudoku (Explicado de Forma Simples)</h1>\n<span class=\"paragraph\">Neste trabalho, vamos construir um Sudoku inteligente. Em vez de escrevermos c\u00f3digo super complexo para o computador adivinhar os n\u00fameros, vamos usar uma ferramenta da Google (o OR-Tools).</span>\n<span class=\"paragraph\">A nossa \u00fanica tarefa \u00e9 explicar ao computador as regras do jogo. A regra de ouro do Sudoku \u00e9 muito simples: <strong>num grupo de c\u00e9lulas, os n\u00fameros n\u00e3o se podem repetir</strong>. A ferramenta da Google percebe esta regra perfeitamente se a modelarmos como um problema de l\u00f3gica.</span>\n<h2 id=\"em-algumas-partes-foi-usado-o-auxilio-de-uma-llm-pode-se-verificar-como-forma-de-comentario-as-partes-em-questao-aqui-esta-o-link-para-a-conversa-com-a-llm-httpssharegeminigoogle3hxbsow7e5to\">Em algumas partes foi usado o auxilio de uma LLM, pode se verificar como forma de comentario as partes em questao. Aqui esta o link para a conversa com a LLM : <a href=\"https://share.gemini.google/3hXBsoW7E5to\" rel=\"noopener noreferrer\" target=\"_blank\">https://share.gemini.google/3hXBsoW7E5to</a></h2>\n<h2 id=\"1-o-saco-generico-regra-r1\">1. O Saco Gen\u00e9rico (Regra R1)</h2>\n<span class=\"paragraph\">A classe <code>Box</code> \u00e9 como se fosse um saco vazio. N\u00f3s podemos atirar c\u00e9lulas l\u00e1 para dentro.</span>\n<span class=\"paragraph\">Este saco n\u00e3o quer saber se as c\u00e9lulas v\u00e3o formar uma linha, uma coluna ou um quadrado. Ele s\u00f3 serve para duas coisas:</span>\n<ol>\n<li>Guardar a posi\u00e7\u00e3o (linha e coluna) e o n\u00famero que l\u00e1 est\u00e1.</li>\n<li>Dar um estalo (erro) se tentarmos meter l\u00e1 dentro uma coordenada ou um n\u00famero que n\u00e3o existe no tabuleiro de Sudoku.</li>\n</ol></span>"
           }
         }
       ],
@@ -59,7 +59,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "49007fdc391cfc8532156ae68152b5c6",
+      "code_hash": "254174605b3351273ca43dd1a1492902",
       "outputs": [
         {
           "type": "data",
@@ -137,7 +137,7 @@
     },
     {
       "id": "Kclp",
-      "code_hash": "8906d7066a22902519f5f2221f1ae053",
+      "code_hash": "d934cde5c48ff25e56c2468df810569a",
       "outputs": [
         {
           "type": "data",
@@ -155,7 +155,7 @@
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>A provar que tudo funciona:</strong></span>\n<span class=\"paragraph\">\u2705 Teste 1 (Limites): Passou! Rejeitou coordenadas que n\u00e3o existem.<br />\n\u2705 Teste 2 (Resolver Sudoku): Passou! Verific\u00e1mos as linhas e colunas todas e a matem\u00e1tica est\u00e1 perfeita.<br />\n\u2705 Teste 3 (Escalar n=2): Passou! O c\u00f3digo funciona perfeitamente para grelhas 4x4.</span>\n<h3 id=\"o-tabuleiro-final\">O Tabuleiro Final:</h3>\n<div class=\"language-text codehilite\"><pre><span></span><code>[6, 3, 1, 4, 8, 5, 9, 7, 2]\n[8, 7, 9, 1, 2, 6, 3, 5, 4]\n[5, 2, 4, 9, 7, 3, 1, 6, 8]\n[4, 8, 3, 7, 9, 2, 6, 1, 5]\n[1, 6, 7, 5, 3, 4, 2, 8, 9]\n[9, 5, 2, 6, 1, 8, 7, 4, 3]\n[3, 1, 8, 2, 4, 7, 5, 9, 6]\n[2, 9, 5, 8, 6, 1, 4, 3, 7]\n[7, 4, 6, 3, 5, 9, 8, 2, 1]\n</code></pre></div></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>A provar que tudo funciona:</strong></span>\n<span class=\"paragraph\">\u2705 Teste 1 (Limites): Passou! Rejeitou coordenadas que n\u00e3o existem.<br />\n\u2705 Teste 2 (Resolver Sudoku): Passou! Verific\u00e1mos as linhas e colunas todas e a matem\u00e1tica est\u00e1 perfeita.<br />\n\u2705 Teste 3 (Escalar n=2): Passou! O c\u00f3digo funciona perfeitamente para grelhas 4x4.</span>\n<h3 id=\"o-tabuleiro-final\">O Tabuleiro Final:</h3>\n<div class=\"language-text codehilite\"><pre><span></span><code>[5, 7, 8, 9, 3, 4, 2, 6, 1]\n[4, 2, 3, 5, 6, 1, 7, 8, 9]\n[9, 1, 6, 2, 7, 8, 5, 3, 4]\n[1, 8, 7, 6, 4, 2, 9, 5, 3]\n[6, 3, 5, 1, 8, 9, 4, 2, 7]\n[2, 9, 4, 7, 5, 3, 6, 1, 8]\n[7, 6, 9, 3, 1, 5, 8, 4, 2]\n[3, 4, 2, 8, 9, 6, 1, 7, 5]\n[8, 5, 1, 4, 2, 7, 3, 9, 6]\n</code></pre></div></span>"
           }
         }
       ],
