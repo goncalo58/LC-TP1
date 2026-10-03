@@ -9,7 +9,7 @@
 
 import marimo
 
-__generated_with = "0.25.1"
+__generated_with = "0.24.2"
 app = marimo.App()
 
 
@@ -36,7 +36,7 @@ def _(Path, mo, pd):
     )
 
     def carregar_dados(pasta_dados: str):
-        caminho = Path(pasta_dados)
+        caminho = Path(__file__).resolve().parent / pasta_dados
         # O pd.read_csv simplesmente lê o ficheiro de texto e transforma numa tabela fácil de usar
         turmas_df = pd.read_csv(caminho / "turmas.csv")
         disciplinas_df = pd.read_csv(caminho / "disciplinas.csv")
