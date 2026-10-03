@@ -1,7 +1,7 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.25.1",
+    "marimo_version": "0.24.2",
     "script_metadata_hash": "0d164e5a55f37ac48f21b1d1f1547d71"
   },
   "cells": [
@@ -20,12 +20,12 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "401cdf1d55de64273f4528fed9f11905",
+      "code_hash": "abe82c86eaeeeafa9f98e901bdeed784",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"trabalho-pratico-sudoku-explicado-de-forma-simples\">Trabalho Pr\u00e1tico: Sudoku (Explicado de Forma Simples)</h1>\n<span class=\"paragraph\">Neste trabalho, vamos construir um Sudoku inteligente. Em vez de escrevermos c\u00f3digo super complexo para o computador adivinhar os n\u00fameros, vamos usar uma ferramenta da Google (o OR-Tools). </span>\n<span class=\"paragraph\">A nossa \u00fanica tarefa \u00e9 explicar ao computador as regras do jogo. A regra de ouro do Sudoku \u00e9 muito simples: <strong>num grupo de c\u00e9lulas, os n\u00fameros n\u00e3o se podem repetir</strong>. A ferramenta da Google percebe esta regra perfeitamente se a modelarmos como um problema de l\u00f3gica.</span>\n<hr />\n<h2 id=\"1-o-saco-generico-regra-r1\">1. O Saco Gen\u00e9rico (Regra R1)</h2>\n<span class=\"paragraph\">A classe <code>Box</code> \u00e9 como se fosse um saco vazio. N\u00f3s podemos atirar c\u00e9lulas l\u00e1 para dentro. </span>\n<span class=\"paragraph\">Este saco n\u00e3o quer saber se as c\u00e9lulas v\u00e3o formar uma linha, uma coluna ou um quadrado. Ele s\u00f3 serve para duas coisas:</span>\n<ol>\n<li>Guardar a posi\u00e7\u00e3o (linha e coluna) e o n\u00famero que l\u00e1 est\u00e1.</li>\n<li>Dar um estalo (erro) se tentarmos meter l\u00e1 dentro uma coordenada ou um n\u00famero que n\u00e3o existe no tabuleiro de Sudoku.</li>\n</ol></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"trabalho-pratico-sudoku-explicado-de-forma-simples\">Trabalho Pr\u00e1tico: Sudoku (Explicado de Forma Simples)</h1>\n<span class=\"paragraph\">Neste trabalho, vamos construir um Sudoku inteligente. Em vez de escrevermos c\u00f3digo super complexo para o computador adivinhar os n\u00fameros, vamos usar uma ferramenta da Google (o OR-Tools).</span>\n<span class=\"paragraph\">A nossa \u00fanica tarefa \u00e9 explicar ao computador as regras do jogo. A regra de ouro do Sudoku \u00e9 muito simples: <strong>num grupo de c\u00e9lulas, os n\u00fameros n\u00e3o se podem repetir</strong>. A ferramenta da Google percebe esta regra perfeitamente se a modelarmos como um problema de l\u00f3gica.</span>\n<hr />\n<h2 id=\"1-o-saco-generico-regra-r1\">1. O Saco Gen\u00e9rico (Regra R1)</h2>\n<span class=\"paragraph\">A classe <code>Box</code> \u00e9 como se fosse um saco vazio. N\u00f3s podemos atirar c\u00e9lulas l\u00e1 para dentro.</span>\n<span class=\"paragraph\">Este saco n\u00e3o quer saber se as c\u00e9lulas v\u00e3o formar uma linha, uma coluna ou um quadrado. Ele s\u00f3 serve para duas coisas:</span>\n<ol>\n<li>Guardar a posi\u00e7\u00e3o (linha e coluna) e o n\u00famero que l\u00e1 est\u00e1.</li>\n<li>Dar um estalo (erro) se tentarmos meter l\u00e1 dentro uma coordenada ou um n\u00famero que n\u00e3o existe no tabuleiro de Sudoku.</li>\n</ol></span>"
           }
         }
       ],
@@ -72,12 +72,12 @@
     },
     {
       "id": "PKri",
-      "code_hash": "515b76ea75185e6cf51e1ffb56ca585f",
+      "code_hash": "c0c9e510dd1f3432c57754ba7b61f948",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"3-sortear-as-pistas-regra-r4\">3. Sortear as Pistas (Regra R4)</h2>\n<span class=\"paragraph\">Ningu\u00e9m joga Sudoku com um tabuleiro totalmente vazio. Precisamos de alguns n\u00fameros para come\u00e7ar. </span>\n<span class=\"paragraph\">Esta fun\u00e7\u00e3o espalha alguns n\u00fameros (pistas) \u00e0 sorte pelo tabuleiro. Para garantir que n\u00e3o tenta colocar dois n\u00fameros no mesmo buraco, usamos uma fun\u00e7\u00e3o do Python que sorteia posi\u00e7\u00f5es sem as repetir. O resultado final \u00e9 devolvido num saco simples (<code>Box</code>).</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"3-sortear-as-pistas-regra-r4\">3. Sortear as Pistas (Regra R4)</h2>\n<span class=\"paragraph\">Ningu\u00e9m joga Sudoku com um tabuleiro totalmente vazio. Precisamos de alguns n\u00fameros para come\u00e7ar.</span>\n<span class=\"paragraph\">Esta fun\u00e7\u00e3o espalha alguns n\u00fameros (pistas) \u00e0 sorte pelo tabuleiro. Para garantir que n\u00e3o tenta colocar dois n\u00fameros no mesmo buraco, usamos uma fun\u00e7\u00e3o do Python que sorteia posi\u00e7\u00f5es sem as repetir. O resultado final \u00e9 devolvido num saco simples (<code>Box</code>).</span></span>"
           }
         }
       ],
@@ -98,12 +98,12 @@
     },
     {
       "id": "SFPL",
-      "code_hash": "5760e3b65b6aceb82a39ce2a8d0f1760",
+      "code_hash": "b5432d5f85b559861c3ab046e90fd914",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"4-o-cerebro-e-a-fabrica-regras-r5-e-r6\">4. O C\u00e9rebro e a F\u00e1brica (Regras R5 e R6)</h2>\n<span class=\"paragraph\">A fun\u00e7\u00e3o <strong><code>solve_sudoku_csp</code></strong> \u00e9 o nosso <strong>c\u00e9rebro</strong> (R5). \nEla recebe os sacos todos cheios de c\u00e9lulas e diz ao computador: <em>\"Olha, em cada um destes sacos, os n\u00fameros n\u00e3o se podem repetir. As pistas t\u00eam de ficar onde est\u00e3o. Agora, preenche o resto e descobre a solu\u00e7\u00e3o!\"</em>.</span>\n<span class=\"paragraph\">A fun\u00e7\u00e3o <strong><code>build_and_solve_sudoku</code></strong> \u00e9 a nossa <strong>f\u00e1brica</strong> (R6). \nEla cria as 9 linhas, as 9 colunas e os 9 quadrados, atira as pistas l\u00e1 para o meio, e manda esse molho todo de regras para o c\u00e9rebro resolver.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"4-o-cerebro-e-a-fabrica-regras-r5-e-r6\">4. O C\u00e9rebro e a F\u00e1brica (Regras R5 e R6)</h2>\n<span class=\"paragraph\">A fun\u00e7\u00e3o <strong><code>solve_sudoku_csp</code></strong> \u00e9 o nosso <strong>c\u00e9rebro</strong> (R5).\nEla recebe os sacos todos cheios de c\u00e9lulas e diz ao computador: <em>\"Olha, em cada um destes sacos, os n\u00fameros n\u00e3o se podem repetir. As pistas t\u00eam de ficar onde est\u00e3o. Agora, preenche o resto e descobre a solu\u00e7\u00e3o!\"</em>.</span>\n<span class=\"paragraph\">A fun\u00e7\u00e3o <strong><code>build_and_solve_sudoku</code></strong> \u00e9 a nossa <strong>f\u00e1brica</strong> (R6).\nEla cria as 9 linhas, as 9 colunas e os 9 quadrados, atira as pistas l\u00e1 para o meio, e manda esse molho todo de regras para o c\u00e9rebro resolver.</span></span>"
           }
         }
       ],
@@ -124,12 +124,12 @@
     },
     {
       "id": "RGSE",
-      "code_hash": "c9808587754d1d5bfe2ceff3669f93a4",
+      "code_hash": "2c91f8bf8b2c3d4b2516eb21721222bc",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"5-prova-dos-9-testes\">5. Prova dos 9 (Testes)</h2>\n<span class=\"paragraph\">Como sorteamos os n\u00fameros iniciais completamente \u00e0s cegas, o gerador pode ter o azar de meter um '5' na mesma linha que outro '5', tornando o jogo imposs\u00edvel logo de in\u00edcio. </span>\n<span class=\"paragraph\">Para que os testes funcionem sem encravar, pedimos ao computador para tentar inventar jogos repetidamente at\u00e9 encontrar um que tenha l\u00f3gica. Quando encontrar, passamos o jogo resolvido a pente fino: vemos se alguma regra falhou ou se as pistas foram roubadas do s\u00edtio.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"5-prova-dos-9-testes\">5. Prova dos 9 (Testes)</h2>\n<span class=\"paragraph\">Como sorteamos os n\u00fameros iniciais completamente \u00e0s cegas, o gerador pode ter o azar de meter um '5' na mesma linha que outro '5', tornando o jogo imposs\u00edvel logo de in\u00edcio.</span>\n<span class=\"paragraph\">Para que os testes funcionem sem encravar, pedimos ao computador para tentar inventar jogos repetidamente at\u00e9 encontrar um que tenha l\u00f3gica. Quando encontrar, passamos o jogo resolvido a pente fino: vemos se alguma regra falhou ou se as pistas foram roubadas do s\u00edtio.</span></span>"
           }
         }
       ],
@@ -137,7 +137,7 @@
     },
     {
       "id": "Kclp",
-      "code_hash": "4622a6270ca9c7b18ddf2a4c0dfb7e98",
+      "code_hash": "8906d7066a22902519f5f2221f1ae053",
       "outputs": [
         {
           "type": "data",
@@ -155,7 +155,7 @@
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>A provar que tudo funciona:</strong></span>\n<span class=\"paragraph\">\u2705 Teste 1 (Limites): Passou! Rejeitou coordenadas que n\u00e3o existem.<br />\n\u2705 Teste 2 (Resolver Sudoku): Passou! Verific\u00e1mos as linhas e colunas todas e a matem\u00e1tica est\u00e1 perfeita.</span>\n<h3 id=\"o-tabuleiro-final\">O Tabuleiro Final:</h3>\n<div class=\"language-text codehilite\"><pre><span></span><code>[2, 7, 3, 8, 5, 6, 4, 9, 1]\n[4, 5, 9, 7, 3, 1, 2, 6, 8]\n[1, 6, 8, 2, 9, 4, 7, 3, 5]\n[7, 2, 4, 1, 6, 3, 8, 5, 9]\n[3, 8, 5, 4, 2, 9, 1, 7, 6]\n[9, 1, 6, 5, 7, 8, 3, 2, 4]\n[6, 9, 1, 3, 8, 7, 5, 4, 2]\n[5, 4, 7, 9, 1, 2, 6, 8, 3]\n[8, 3, 2, 6, 4, 5, 9, 1, 7]\n</code></pre></div></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>A provar que tudo funciona:</strong></span>\n<span class=\"paragraph\">\u2705 Teste 1 (Limites): Passou! Rejeitou coordenadas que n\u00e3o existem.<br />\n\u2705 Teste 2 (Resolver Sudoku): Passou! Verific\u00e1mos as linhas e colunas todas e a matem\u00e1tica est\u00e1 perfeita.<br />\n\u2705 Teste 3 (Escalar n=2): Passou! O c\u00f3digo funciona perfeitamente para grelhas 4x4.</span>\n<h3 id=\"o-tabuleiro-final\">O Tabuleiro Final:</h3>\n<div class=\"language-text codehilite\"><pre><span></span><code>[6, 3, 1, 4, 8, 5, 9, 7, 2]\n[8, 7, 9, 1, 2, 6, 3, 5, 4]\n[5, 2, 4, 9, 7, 3, 1, 6, 8]\n[4, 8, 3, 7, 9, 2, 6, 1, 5]\n[1, 6, 7, 5, 3, 4, 2, 8, 9]\n[9, 5, 2, 6, 1, 8, 7, 4, 3]\n[3, 1, 8, 2, 4, 7, 5, 9, 6]\n[2, 9, 5, 8, 6, 1, 4, 3, 7]\n[7, 4, 6, 3, 5, 9, 8, 2, 1]\n</code></pre></div></span>"
           }
         }
       ],

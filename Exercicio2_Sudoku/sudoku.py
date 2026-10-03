@@ -8,7 +8,7 @@
 
 import marimo
 
-__generated_with = "0.25.1"
+__generated_with = "0.24.2"
 app = marimo.App(width="medium")
 
 
@@ -291,6 +291,16 @@ def _(build_and_solve_sudoku, generate_random_clues, mo):
         for (i, j), value in clues.cells.items():
             assert solution[i][j] == value, f"O PC apagou a nossa pista ({i},{j})."
 
+        # Verifica se os blocos (quadrados n x n) têm os números todos corretos
+        for block_i in range(n):
+                for block_j in range(n):
+                    block_values = []
+                    start_i, start_j = block_i * n, block_j * n
+                    for di in range(n):
+                        for dj in range(n):
+                            block_values.append(solution[start_i + di][start_j + dj])
+                    assert set(block_values) == expected, f"As contas falharam no bloco ({block_i}, {block_j})."
+
     def generate_solvable(n, k):
         # Tenta 100 vezes até encontrar um jogo que faça sentido
         for _ in range(100):
@@ -315,9 +325,17 @@ def _(build_and_solve_sudoku, generate_random_clues, mo):
         if solution3 is None:
             log.append("❌ Muito azar! O PC não gerou nenhum tabuleiro possível.")
             return mo.md("  \n".join(log))
-        
+    
         validate_solution(3, solution3, clues3)
         log.append("✅ Teste 2 (Resolver Sudoku): Passou! Verificámos as linhas e colunas todas e a matemática está perfeita.")
+
+        # TESTE 3: Garantir que não está colado ao 9x9 (Testar n=2 -> Grelha 4x4)
+        clues2, solution2 = generate_solvable(n=2, k=3)
+        if solution2 is None:
+                log.append("❌ Não foi possível gerar um tabuleiro 4x4 solúvel.")
+        else:
+                validate_solution(2, solution2, clues2)
+                log.append("✅ Teste 3 (Escalar n=2): Passou! O código funciona perfeitamente para grelhas 4x4.")
 
         # Imprime a Grelha Final para a podermos ver
         grid = ["", "### O Tabuleiro Final:", "```text"]
