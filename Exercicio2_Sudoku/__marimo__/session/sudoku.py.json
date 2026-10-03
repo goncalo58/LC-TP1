@@ -2,7 +2,7 @@
   "version": "1",
   "metadata": {
     "marimo_version": "0.25.1",
-    "script_metadata_hash": null
+    "script_metadata_hash": "0d164e5a55f37ac48f21b1d1f1547d71"
   },
   "cells": [
     {
@@ -20,12 +20,12 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "6a3261babbca75dd17dd0031f5a47fa5",
+      "code_hash": "c190a574959717e869bed56220503f5f",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"trabalho-pratico-sudoku-generico-como-csp\">Trabalho Pr\u00e1tico: Sudoku Gen\u00e9rico como CSP</h1>\n<span class=\"paragraph\">Implementa\u00e7\u00e3o das regras R1 a R6.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"trabalho-pratico-sudoku-generico-como-csp\">Trabalho Pr\u00e1tico: Sudoku Gen\u00e9rico como CSP</h1>\n<h2 id=\"implementacao\">Implementa\u00e7\u00e3o</h2>\n<span class=\"paragraph\">Este trabalho implementa um gerador e resolvedor de Sudoku gen\u00e9rico\nde dimens\u00e3o <marimo-tex class=\"arithmatex\">||(n^2 \\times n^2||)</marimo-tex>, modelado como um Problema de\nSatisfa\u00e7\u00e3o de Restri\u00e7\u00f5es (CSP).</span>\n<span class=\"paragraph\">Para a resolu\u00e7\u00e3o foi utilizado o <strong>CP-SAT do OR-Tools</strong>.</span>\n<span class=\"paragraph\">Esta abordagem \u00e9 adequada porque cada c\u00e9lula pode ser representada\npor uma vari\u00e1vel inteira com dom\u00ednio <marimo-tex class=\"arithmatex\">||([1,n^2]||)</marimo-tex> e as regras do Sudoku\npodem ser representadas atrav\u00e9s da restri\u00e7\u00e3o <code>AllDifferent</code>.</span>\n<span class=\"paragraph\">Assim, a mesma restri\u00e7\u00e3o pode ser aplicada de forma gen\u00e9rica a\nlinhas, colunas, blocos e outros grupos de c\u00e9lulas.</span></span>"
           }
         }
       ],
@@ -33,7 +33,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "f721bb570a75255c09e0c316f515e194",
+      "code_hash": "60524a19518607d351ae6cde2578d718",
       "outputs": [
         {
           "type": "data",
@@ -46,7 +46,7 @@
     },
     {
       "id": "bkHC",
-      "code_hash": "8d55abb02f9e8eadf45cd860c7cda892",
+      "code_hash": "fff3654e75f67cb82ad03256f3e39b2a",
       "outputs": [
         {
           "type": "data",
@@ -59,7 +59,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "17c811e17505c703ae1d571fefaf8e14",
+      "code_hash": "bb23660ec254c37908961f318ebfcbc3",
       "outputs": [
         {
           "type": "data",
@@ -72,7 +72,7 @@
     },
     {
       "id": "PKri",
-      "code_hash": "1f1207cdefff5f2fd37412a7c944fdf1",
+      "code_hash": "7f0d04e68087c3c0d70fe055c22a76f6",
       "outputs": [
         {
           "type": "data",
@@ -85,12 +85,12 @@
     },
     {
       "id": "Xref",
-      "code_hash": "78083a3283174288cc7da2933f6b48e0",
+      "code_hash": "f103ce4cedd14e42382ec18b741d8acb",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>A iniciar testes de valida\u00e7\u00e3o autom\u00e1tica...</strong></span>\n<span class=\"paragraph\">\u2705 Teste 1 (Limites da grelha): Passou com sucesso! Rejeitou coordenadas inv\u00e1lidas.<br />\n\u2705 Teste 2 (Encontrar Solu\u00e7\u00e3o): Passou! Solver encontrou uma grelha v\u00e1lida.<br />\n\u2705 Teste 3 (Verificar Regras e Pistas): Passou! Linhas, colunas e pistas mantiveram integridade.</span>\n<span class=\"paragraph\"><strong>Grelha Final Resolvida:</strong>\n<div class=\"language-text codehilite\"><pre><span></span><code>[2, 8, 1, 4, 3, 9, 7, 6, 5]\n[7, 9, 5, 8, 1, 6, 4, 3, 2]\n[4, 6, 3, 2, 5, 7, 9, 8, 1]\n[5, 1, 9, 3, 2, 4, 8, 7, 6]\n[8, 4, 2, 7, 6, 1, 3, 5, 9]\n[3, 7, 6, 9, 8, 5, 2, 1, 4]\n[1, 3, 8, 6, 9, 2, 5, 4, 7]\n[9, 5, 7, 1, 4, 3, 6, 2, 8]\n[6, 2, 4, 5, 7, 8, 1, 9, 3]\n</code></pre></div></span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Testes autom\u00e1ticos:</strong><br />\n Coordenadas inv\u00e1lidas rejeitadas.<br />\n Valores inv\u00e1lidos rejeitados.<br />\n Sudoku n=3 (9x9): linhas, colunas, blocos e pistas v\u00e1lidos.<br />\n Sudoku n=2 (4x4): linhas, colunas, blocos e pistas v\u00e1lidos.</span>\n<h2 id=\"grellha-9x9-resolvida\">Grellha 9x9 resolvida</h2>\n<div class=\"language-text codehilite\"><pre><span></span><code>[6, 1, 8, 4, 9, 5, 2, 7, 3]\n[7, 5, 4, 2, 6, 3, 1, 8, 9]\n[3, 2, 9, 8, 1, 7, 5, 4, 6]\n[1, 6, 2, 5, 4, 8, 9, 3, 7]\n[4, 7, 3, 1, 2, 9, 8, 6, 5]\n[8, 9, 5, 3, 7, 6, 4, 1, 2]\n[5, 4, 1, 7, 3, 2, 6, 9, 8]\n[2, 3, 6, 9, 8, 1, 7, 5, 4]\n[9, 8, 7, 6, 5, 4, 3, 2, 1]\n</code></pre></div></span>"
           }
         }
       ],

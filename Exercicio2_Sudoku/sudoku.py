@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "marimo>=0.24.2",
+#     "ortools",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.25.1"
@@ -15,281 +23,690 @@ def _():
 
 @app.cell
 def _(mo):
-    mo.md("""
+    mo.md(r"""
     # Trabalho Prático: Sudoku Genérico como CSP
-    Implementação das regras R1 a R6.
+
+    ## Implementação
+
+    Este trabalho implementa um gerador e resolvedor de Sudoku genérico
+    de dimensão $n^2 \times n^2$, modelado como um Problema de
+    Satisfação de Restrições (CSP).
+
+    Para a resolução foi utilizado o **CP-SAT do OR-Tools**.
+
+    Esta abordagem é adequada porque cada célula pode ser representada
+    por uma variável inteira com domínio $[1,n^2]$ e as regras do Sudoku
+    podem ser representadas através da restrição `AllDifferent`.
+
+    Assim, a mesma restrição pode ser aplicada de forma genérica a
+    linhas, colunas, blocos e outros grupos de células.
     """)
     return
 
 
 @app.cell
 def _():
+
     class Box:
         """
         R1: Grupo genérico de células.
-        Esta é a classe base. Não sabe se é linha, coluna ou bloco.
-        Apenas guarda células e sabe que todas têm de ter valores diferentes.
+
+        Um Box representa qualquer conjunto de células da grelha.
+        Cada célula pode estar livre (None) ou ter um valor fixo.
+
+        Esta classe não sabe se o grupo representa uma linha,
+        coluna, bloco ou pistas.
         """
+
         def __init__(self, n, initial_cells=None):
+
             self.n = n
-            self.n2 = n * n # Se n=3, a grelha é 9x9, logo n2=9
-        
-            # O dicionário 'cells' guarda as células que pertencem a este grupo.
-            # Formato: {(linha, coluna): valor}. Se não tiver valor fixo, guarda None.
-            self.cells = {} 
-        
+            self.n2 = n * n
+
+            # Dicionário:
+            # (linha, coluna) -> valor
+            #
+            # None significa que a célula não tem valor fixo.
+            self.cells = {}
+
+            # Permite criar o Box já com células.
             if initial_cells:
+
                 for (i, j), val in initial_cells.items():
+
                     self.add(i, j, val)
 
+
         def add(self, i, j, val=None):
-            # DECISÃO: Validação rigorosa pedida pelo professor.
-            # Rejeita imediatamente se as coordenadas estiverem fora do tabuleiro.
-            if not (0 <= i < self.n2 and 0 <= j < self.n2):
-                raise ValueError(f"Coordenadas ({i}, {j}) estão fora da grelha!")
-        
-            # Rejeita se o valor for inválido (tem de ser entre 1 e n^2, ex: 1 a 9)
-            if val is not None and not (1 <= val <= self.n2):
-                raise ValueError(f"Valor {val} tem de estar entre 1 e {self.n2}.")
-        
-            # Adiciona ao dicionário de células deste grupo
+            """
+            Adiciona uma célula ao grupo.
+
+            Se val for diferente de None, a célula fica
+            fixa nesse valor.
+            """
+
+            # Verificar se as coordenadas pertencem à grelha.
+            if not (
+                0 <= i < self.n2
+                and
+                0 <= j < self.n2
+            ):
+
+                raise ValueError(
+                    f"Coordenadas ({i}, {j}) estão fora da grelha!"
+                )
+
+            # Verificar se o valor é permitido.
+            if val is not None:
+
+                if not (1 <= val <= self.n2):
+
+                    raise ValueError(
+                        f"Valor {val} tem de estar entre "
+                        f"1 e {self.n2}."
+                    )
+
+            # Adicionar a célula.
             self.cells[(i, j)] = val
+
             return self
 
+
         def to_matrix(self):
-            # Cria uma matriz (lista de listas) cheia de zeros
-            mat = [[0] * self.n2 for _ in range(self.n2)]
-        
-            # Preenche a matriz apenas com as células que pertencem a este Box
+            """
+            Converte o grupo para uma matriz n² x n².
+
+            As células que não têm valor fixo aparecem como 0.
+            """
+
+            mat = [
+                [0] * self.n2
+                for _ in range(self.n2)
+            ]
+
             for (i, j), val in self.cells.items():
+
                 if val is not None:
+
                     mat[i][j] = val
+
             return mat
+
 
     class Cube(Box):
         """
-        R2: Grupo que representa um bloco n x n (os quadrados do Sudoku).
-        Herda de Box (é um Box especializado).
+        R2: Grupo correspondente a um bloco n x n.
         """
+
         def __init__(self, n, block_i, block_j):
-            super().__init__(n) # Executa primeiro o construtor do Box original
-        
-            # Multiplicamos por n para saber a coordenada real de início do bloco na grelha
+
+            # Os índices dos blocos têm de estar entre 0 e n-1.
+            if not (
+                0 <= block_i < n
+                and
+                0 <= block_j < n
+            ):
+
+                raise ValueError(
+                    "Índice de bloco inválido."
+                )
+
+            # Inicializar primeiro o Box.
+            super().__init__(n)
+
+            # Canto superior esquerdo do bloco.
             start_i = block_i * n
             start_j = block_j * n
-        
-            # Percorre o quadrado n x n e adiciona essas coordenadas ao grupo
+
+            # Adicionar todas as células do bloco.
             for di in range(n):
+
                 for dj in range(n):
-                    self.add(start_i + di, start_j + dj)
+
+                    self.add(
+                        start_i + di,
+                        start_j + dj
+                    )
+
 
     class Path(Box):
         """
-        R3: Grupo que representa uma linha ou coluna inteira.
-        Também herda de Box, mas calcula coordenadas em linha reta.
+        R3: Grupo correspondente a um troço reto.
+
+        Pode ser horizontal ou vertical e funciona
+        nos dois sentidos.
         """
+
         def __init__(self, n, start, end):
+
             super().__init__(n)
+
             i1, j1 = start
             i2, j2 = end
-        
-            # DECISÃO: Truque matemático para saber a direção (di, dj).
-            # Se o fim é maior que o início, anda +1. Se menor, anda -1. Se igual, 0.
-            di = 1 if i2 > i1 else (-1 if i2 < i1 else 0)
-            dj = 1 if j2 > j1 else (-1 if j2 < j1 else 0)
-        
-            i, j = i1, j1
-        
-            # Ciclo que anda passo a passo até chegar à coordenada final
+
+            # Um Path só pode ser horizontal ou vertical.
+            if i1 != i2 and j1 != j2:
+
+                raise ValueError(
+                    "Path tem de ser horizontal ou vertical."
+                )
+
+            # Determinar o sentido vertical.
+            if i2 > i1:
+                di = 1
+
+            elif i2 < i1:
+                di = -1
+
+            else:
+                di = 0
+
+            # Determinar o sentido horizontal.
+            if j2 > j1:
+                dj = 1
+
+            elif j2 < j1:
+                dj = -1
+
+            else:
+                dj = 0
+
+            # Começar na primeira coordenada.
+            i = i1
+            j = j1
+
             while True:
+
                 self.add(i, j)
-                if i == i2 and j == j2: # Chegou ao fim, quebra o ciclo
+
+                # Quando chegamos ao fim, terminamos.
+                if i == i2 and j == j2:
                     break
+
                 i += di
                 j += dj
-            
+
 
     return Box, Cube, Path
 
 
 @app.cell
 def _(Box, random):
+
     def generate_random_clues(n, k=None):
         """
-        R4: Gera pistas (números iniciais) aleatórias.
-        Devolve um Box simples contendo k células fixas.
+        Gera k pistas aleatórias.
+
+        O resultado continua a ser simplesmente um Box.
         """
-        if k is None:
-            k = n * 2  # Se não pedirem k específico, assume n*2 pistas
-        
+
         n2 = n * n
-        clue_box = Box(n)
-    
-        # DECISÃO: Usar um 'set' (conjunto) porque não permite elementos repetidos.
-        # Garante que não tentamos colocar duas pistas na mesma célula exata.
-        added_coords = set()
-    
-        # Proteção contra ciclos infinitos se pedirem mais pistas do que células existem
-        if k > n2 * n2:
-            k = n2 * n2 
-    
-        # Sorteia até ter atingido o número de pistas desejadas
-        while len(added_coords) < k:
-            i = random.randint(0, n2 - 1)
-            j = random.randint(0, n2 - 1)
-        
-            if (i, j) not in added_coords:
-                val = random.randint(1, n2) 
-                clue_box.add(i, j, val)
-                added_coords.add((i, j))
-            
-        return clue_box
+
+        # Valor por omissão.
+        if k is None:
+            k = n * 2
+
+        # Não podemos pedir mais pistas do que células.
+        if k < 0 or k > n2 * n2:
+
+            raise ValueError(
+                f"k deve estar entre 0 e {n2 * n2}."
+            )
+
+        clues = Box(n)
+
+        # Criar todas as coordenadas possíveis.
+        coordinates = []
+
+        for i in range(n2):
+
+            for j in range(n2):
+
+                coordinates.append(
+                    (i, j)
+                )
+
+        # Escolher k posições sem repetição.
+        chosen = random.sample(
+            coordinates,
+            k
+        )
+
+        # Atribuir um valor aleatório a cada posição.
+        for i, j in chosen:
+
+            value = random.randint(
+                1,
+                n2
+            )
+
+            clues.add(
+                i,
+                j,
+                value
+            )
+
+        return clues
+
 
     return (generate_random_clues,)
 
 
 @app.cell
 def _(Cube, Path, cp_model):
+
     def solve_sudoku_csp(n, groups):
         """
-        R5: O Cérebro. Transforma todos os grupos (linhas, colunas, blocos, pistas)
-        num modelo de Problema de Satisfação de Restrições e resolve-o.
+        Cria e resolve o modelo CSP.
+
+        Recebe grupos sem distinguir se são linhas,
+        colunas, blocos ou pistas.
         """
-        model = cp_model.CpModel() 
+
         n2 = n * n
-    
-        # Dicionário para guardar as "incógnitas" que o solver vai ter de descobrir
-        grid_vars = {} 
 
-        # 1. CRIAR AS VARIÁVEIS DO JOGO
+        model = cp_model.CpModel()
+
+        # ----------------------------------------------------
+        # 1. Variáveis
+        # ----------------------------------------------------
+
+        grid_vars = {}
+
         for i in range(n2):
+
             for j in range(n2):
-                # Dizemos ao solver: "Esta célula só pode ter valores de 1 a n^2"
-                grid_vars[(i, j)] = model.NewIntVar(1, n2, f'Celula_{i}_{j}')
 
-        # 2. APLICAR AS REGRAS (RESTRIÇÕES) AOS GRUPOS
+                grid_vars[(i, j)] = model.NewIntVar(
+                    1,
+                    n2,
+                    f"Celula_{i}_{j}"
+                )
+
+        # ----------------------------------------------------
+        # 2. Restrições
+        # ----------------------------------------------------
+
         for group in groups:
-            group_vars = [] 
-        
-            for (i, j), fixed_val in group.cells.items():
-                var = grid_vars[(i, j)]
-                group_vars.append(var)
-            
-                # Se a célula tem um valor fixo (é uma pista), obrigamos a incógnita
-                # a ser exatamente esse número.
-                if fixed_val is not None:
-                    model.Add(var == fixed_val)
-        
-            # A REGRA DE OURO: model.AddAllDifferent obriga a que todas as incógnitas
-            # deste grupo tenham números diferentes. Isto resolve linhas, colunas e blocos de uma vez!
-            if len(group_vars) > 0:
-                model.AddAllDifferent(group_vars)
 
-        # 3. PEDIR AO SOLVER PARA TRABALHAR
+            group_vars = []
+
+            for (i, j), fixed_value in group.cells.items():
+
+                var = grid_vars[(i, j)]
+
+                group_vars.append(var)
+
+                # Se existir valor fixo, aplicar a pista.
+                if fixed_value is not None:
+
+                    model.Add(
+                        var == fixed_value
+                    )
+
+            # Todas as células do grupo têm valores diferentes.
+            if len(group_vars) > 1:
+
+                model.AddAllDifferent(
+                    group_vars
+                )
+
+        # ----------------------------------------------------
+        # 3. Resolver
+        # ----------------------------------------------------
+
         solver = cp_model.CpSolver()
+
         status = solver.Solve(model)
 
-        # Se encontrou uma solução possível
-        if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
+        # ----------------------------------------------------
+        # 4. Construir a solução
+        # ----------------------------------------------------
+
+        if status in (
+            cp_model.OPTIMAL,
+            cp_model.FEASIBLE
+        ):
+
             solution = []
-            # Reconstrói a matriz com os números que o solver descobriu
+
             for i in range(n2):
-                linha = []
+
+                row = []
+
                 for j in range(n2):
-                    valor_descoberto = solver.Value(grid_vars[(i, j)])
-                    linha.append(valor_descoberto)
-                solution.append(linha)
+
+                    value = solver.Value(
+                        grid_vars[(i, j)]
+                    )
+
+                    row.append(value)
+
+                solution.append(row)
+
             return solution
-        else:
-            return None # Sinaliza que este conjunto de pistas não tem solução possível
+
+        # None permite distinguir claramente
+        # o caso em que não existe solução.
+        return None
+
+
+    # ========================================================
+    # R6 - CONSTRUÇÃO DO SUDOKU
+    # ========================================================
 
     def build_and_solve_sudoku(n, clues_box):
         """
-        R6: Junta as peças todas e cria um puzzle completo.
-        Passa todas as instâncias de restrição para o cérebro (solver).
+        Constrói todas as linhas, colunas e blocos
+        e adiciona também as pistas.
         """
+
         n2 = n * n
-        all_groups = [clues_box] # Começamos a lista de grupos com as pistas geradas
-    
-        # Criar todas as Linhas e Colunas (usando a classe Path)
+
+        # O primeiro grupo contém as pistas.
+        groups = [clues_box]
+
+        # ----------------------------------------------------
+        # Linhas
+        # ----------------------------------------------------
+
         for i in range(n2):
-            all_groups.append(Path(n, start=(i, 0), end=(i, n2 - 1))) 
-            all_groups.append(Path(n, start=(0, i), end=(n2 - 1, i))) 
-        
-        # Criar todos os Blocos n x n (usando a classe Cube)
+
+            row = Path(
+                n,
+                start=(i, 0),
+                end=(i, n2 - 1)
+            )
+
+            groups.append(row)
+
+        # ----------------------------------------------------
+        # Colunas
+        # ----------------------------------------------------
+
+        for j in range(n2):
+
+            column = Path(
+                n,
+                start=(0, j),
+                end=(n2 - 1, j)
+            )
+
+            groups.append(column)
+
+        # ----------------------------------------------------
+        # Blocos
+        # ----------------------------------------------------
+
         for block_i in range(n):
+
             for block_j in range(n):
-                all_groups.append(Cube(n, block_i, block_j))
-            
-        # Mandar tudo para o solver
-        return solve_sudoku_csp(n, all_groups)
+
+                block = Cube(
+                    n,
+                    block_i,
+                    block_j
+                )
+
+                groups.append(block)
+
+        # Resolver o CSP completo.
+        return solve_sudoku_csp(
+            n,
+            groups
+        )
+
 
     return (build_and_solve_sudoku,)
 
 
 @app.cell
 def _(Box, build_and_solve_sudoku, generate_random_clues, mo):
-    def run_tests():
+
+    def validate_solution(n, solution, clues):
         """
-        Validação e Testes automáticos exigidos no enunciado.
-        Usa blocos 'try' e 'assert' para provar que a lógica não falha.
-        Como isto é Marimo, guardamos o log em texto Markdown (mo.md) para renderizar bonito.
+        Verifica automaticamente se uma solução
+        cumpre todas as regras do Sudoku.
         """
-        n = 3
+
         n2 = n * n
-        log = ["**A iniciar testes de validação automática...**\n"]
-    
-        # TESTE 1: Limites (Garantir que a rejeição de coordenadas funciona)
-        try:
-            grupo_errado = Box(n)
-            grupo_errado.add(10, 0) # 10 está fora de limites numa grelha 9x9
-            log.append("❌ ERRO no Teste 1: Deixou adicionar célula fora do tabuleiro!")
-        except ValueError:
-            log.append("✅ Teste 1 (Limites da grelha): Passou com sucesso! Rejeitou coordenadas inválidas.")
-        
-       # TESTE 2: Geração de Solução
-            solution = None
-            clues = None
-        
-            # DECISÃO: Como geramos pistas 100% à sorte, podemos gerar um puzzle logicamente
-            # impossível (ex: dois '5' na mesma linha). Por isso, tentamos até 100 vezes.
-            for tentativa in range(100):
-                # Reduzido para 5 pistas para diminuir a probabilidade de conflito
-                clues = generate_random_clues(n, k=5) 
-                solution = build_and_solve_sudoku(n, clues)
-                if solution is not None:
-                    break 
-                
-            if solution is None:
-                log.append("❌ Azar! O gerador criou 100 puzzles logicamente impossíveis seguidos. Volta a correr a célula.")
-                return mo.md("  \n".join(log))
-        
-        log.append("✅ Teste 2 (Encontrar Solução): Passou! Solver encontrou uma grelha válida.")
-        
-        # TESTE 3: Verificação de Regras Matemáticas
-        # O conjunto 'expected_set' tem os números {1, 2, 3, 4, 5, 6, 7, 8, 9}
-        expected_set = set(range(1, n2 + 1)) 
-    
-        # O 'assert' para o código se a afirmação for mentira.
+
+        expected = set(
+            range(1, n2 + 1)
+        )
+
+        # ----------------------------------------------------
+        # Verificar linhas
+        # ----------------------------------------------------
+
         for i in range(n2):
-            linha_atual = set(solution[i][j] for j in range(n2))
-            coluna_atual = set(solution[j][i] for j in range(n2))
-        
-            assert linha_atual == expected_set, f"Erro: Linha {i} não tem os números todos diferentes!"
-            assert coluna_atual == expected_set, f"Erro: Coluna {i} não tem os números todos diferentes!"
-        
-        for (i, j), val in clues.cells.items():
-            assert solution[i][j] == val, f"Erro grave: Solver apagou ou alterou a pista ({i},{j})!"
-        
-        log.append("✅ Teste 3 (Verificar Regras e Pistas): Passou! Linhas, colunas e pistas mantiveram integridade.\n")
-    
-        # Desenhar Grelha Final para ser visualizada 
-        grid_md = ["**Grelha Final Resolvida:**", "```text"]
-        for linha in solution:
-            grid_md.append(str(linha))
-        grid_md.append("```")
-    
-        return mo.md("  \n".join(log) + "\n\n" + "\n".join(grid_md))
+
+            row = set(
+                solution[i]
+            )
+
+            assert row == expected, (
+                f"Linha {i} inválida."
+            )
+
+        # ----------------------------------------------------
+        # Verificar colunas
+        # ----------------------------------------------------
+
+        for j in range(n2):
+
+            column = set()
+
+            for i in range(n2):
+
+                column.add(
+                    solution[i][j]
+                )
+
+            assert column == expected, (
+                f"Coluna {j} inválida."
+            )
+
+        # ----------------------------------------------------
+        # Verificar blocos n x n
+        # ----------------------------------------------------
+
+        for block_i in range(n):
+
+            for block_j in range(n):
+
+                values = set()
+
+                start_i = block_i * n
+                start_j = block_j * n
+
+                for di in range(n):
+
+                    for dj in range(n):
+
+                        values.add(
+                            solution[
+                                start_i + di
+                            ][
+                                start_j + dj
+                            ]
+                        )
+
+                assert values == expected, (
+                    f"Bloco ({block_i}, "
+                    f"{block_j}) inválido."
+                )
+
+        # ----------------------------------------------------
+        # Verificar pistas
+        # ----------------------------------------------------
+
+        for (i, j), value in clues.cells.items():
+
+            assert solution[i][j] == value, (
+                f"A pista ({i},{j}) foi alterada."
+            )
+
+
+    def generate_solvable(n, k):
+        """
+        Como as pistas são totalmente aleatórias,
+        algumas combinações podem não ter solução.
+
+        Nesse caso são geradas novas pistas.
+        """
+
+        for _ in range(100):
+
+            clues = generate_random_clues(
+                n,
+                k
+            )
+
+            solution = build_and_solve_sudoku(
+                n,
+                clues
+            )
+
+            if solution is not None:
+
+                return clues, solution
+
+        return None, None
+
+
+    def run_tests():
+
+        log = [
+            "**Testes automáticos:**"
+        ]
+
+        # ====================================================
+        # TESTE 1
+        # Coordenadas inválidas
+        # ====================================================
+
+        try:
+
+            b = Box(3)
+
+            b.add(
+                10,
+                0
+            )
+
+            log.append(
+                " Coordenadas inválidas não foram rejeitadas."
+            )
+
+        except ValueError:
+
+            log.append(
+                " Coordenadas inválidas rejeitadas."
+            )
+
+        # ====================================================
+        # TESTE 2
+        # Valores inválidos
+        # ====================================================
+
+        try:
+
+            b = Box(3)
+
+            b.add(
+                0,
+                0,
+                10
+            )
+
+            log.append(
+                " Valor inválido não foi rejeitado."
+            )
+
+        except ValueError:
+
+            log.append(
+                " Valores inválidos rejeitados."
+            )
+
+        # ====================================================
+        # TESTE 3
+        # n = 3 -> Sudoku 9x9
+        # ====================================================
+
+        clues3, solution3 = generate_solvable(
+            n=3,
+            k=5
+        )
+
+        assert solution3 is not None, (
+            "Não foi possível obter uma solução 9x9."
+        )
+
+        validate_solution(
+            3,
+            solution3,
+            clues3
+        )
+
+        log.append(
+            " Sudoku n=3 (9x9): "
+            "linhas, colunas, blocos e pistas válidos."
+        )
+
+        # ====================================================
+        # TESTE 4
+        # n = 2 -> Sudoku 4x4
+        # ====================================================
+
+        clues2, solution2 = generate_solvable(
+            n=2,
+            k=2
+        )
+
+        assert solution2 is not None, (
+            "Não foi possível obter uma solução 4x4."
+        )
+
+        validate_solution(
+            2,
+            solution2,
+            clues2
+        )
+
+        log.append(
+            " Sudoku n=2 (4x4): "
+            "linhas, colunas, blocos e pistas válidos."
+        )
+
+        # ====================================================
+        # Mostrar a grelha 9x9
+        # ====================================================
+
+        grid = [
+            "",
+            "## Grellha 9x9 resolvida",
+            "",
+            "```text"
+        ]
+
+        for row in solution3:
+
+            grid.append(
+                str(row)
+            )
+
+        grid.append(
+            "```"
+        )
+
+        return mo.md(
+            "  \n".join(log)
+            + "\n\n"
+            + "\n".join(grid)
+        )
+
 
     resultado_testes = run_tests()
     return (resultado_testes,)
@@ -297,7 +714,7 @@ def _(Box, build_and_solve_sudoku, generate_random_clues, mo):
 
 @app.cell
 def _(resultado_testes):
-    # Imprime o resultado dos testes na interface visual do Marimo
+
     resultado_testes
     return
 
