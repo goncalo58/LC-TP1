@@ -8,7 +8,7 @@
 
 import marimo
 
-__generated_with = "0.24.2"
+__generated_with = "0.25.1"
 app = marimo.App(width="medium")
 
 
@@ -24,7 +24,7 @@ def _():
 @app.cell
 def _(mo):
     mo.md(r"""
-    # Trabalho Prático: Sudoku (Explicado de Forma Simples)
+    # Trabalho Prático: Sudoku
 
     Neste trabalho, vamos construir um Sudoku inteligente. Em vez de escrevermos código super complexo para o computador adivinhar os números, vamos usar uma ferramenta da Google (o OR-Tools).
 
@@ -328,7 +328,7 @@ def _(build_and_solve_sudoku, generate_random_clues, mo):
         if solution3 is None:
             log.append("❌ Muito azar! O PC não gerou nenhum tabuleiro possível.")
             return mo.md("  \n".join(log))
-    
+
         validate_solution(3, solution3, clues3)
         log.append("✅ Teste 2 (Resolver Sudoku): Passou! Verificámos as linhas e colunas todas e a matemática está perfeita.")
 
